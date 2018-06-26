@@ -1,5 +1,6 @@
 package strudel;
 
+import java.util.ArrayList;
 import javafx.scene.Parent;
 import javafx.scene.canvas.Canvas;
 
@@ -9,9 +10,10 @@ import javafx.scene.paint.Color;
 public class strudelView {
     
     private final int width = 360;
-    private final int height = 640;
+    private int height = 640;
     public Pane root = new Pane();
-    //final Canvas canvas = new Canvas(width, height);
+    public ArrayList<Pane> studelPanes = new ArrayList<>();
+    final Canvas canvas = new Canvas(width, height);
     
     strudelLogic logic = new strudelLogic();
     
@@ -24,6 +26,7 @@ public class strudelView {
         header.setStyle("-fx-background-color: #F01010;");
         
         root.setStyle("-fx-background-color: #FFFFFF;");
+        populateStrudels(root);
         
         Pane footer = new Pane();
         footer.setPrefWidth(width+15);
@@ -34,6 +37,22 @@ public class strudelView {
         root.getChildren().addAll(header, footer);
         
         return root;
+    }
+    
+    public Pane populateStrudels(Pane pane) {
+        ArrayList<Strudel> strudels = logic.getTest();
+        for (Strudel s : strudels) {
+            
+        }
+        return pane;
+    }
+    
+    public void setHeight(int height) {
+        this.height = height;
+    }
+    
+    public int getHeight() {
+        return this.height;
     }
     
 }
