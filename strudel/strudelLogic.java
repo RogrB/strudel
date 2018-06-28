@@ -42,14 +42,39 @@ public class strudelLogic {
         s5.setTime(now.getTime());
         s5.setMessage("SADFASDFASDF");
         s5.setVotes(2);
-        s5.setHeight(150);
+        s5.setHeight(100);
+        
+        Strudel s6 = new Strudel();
+        s6.setColor("#F35232");
+        s6.setTime(now.getTime());
+        s6.setMessage("LOREM IPSUM OG SÅNT");
+        s6.setVotes(1);
+        s6.setHeight(150);        
         
         strudel.add(s1);
         strudel.add(s2);
         strudel.add(s3);
         strudel.add(s4);
         strudel.add(s5);
+        strudel.add(s6);
         return strudel;
+    }
+    
+    public String getTime(Strudel s) {
+        Date now = new Date();
+        long dif = (now.getTime() - s.getTime()) / 1000;
+        if (dif < 60) {
+            return Long.toString(dif) + "s";
+        }
+        else if (dif >= 60 && dif < 3600) {
+            return Long.toString(dif/60) + "min";
+        }
+        else if (dif >= 3600 && dif < 86400) {
+            return Long.toString(dif/3600) + "h";
+        }
+        else {
+            return Long.toString(dif/86400) + "d";
+        }
     }
     
 }

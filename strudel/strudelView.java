@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import javafx.scene.Parent;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Control;
+import javafx.scene.control.ScrollPane;
 
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
@@ -23,50 +26,58 @@ public class strudelView {
         Pane header = new Pane();
         header.setPrefWidth(width+15);
         header.setPrefHeight(30);
-        header.setStyle("-fx-background-color: #F01010;");
+        header.setStyle("-fx-background-color: #000000;");
         
-        root.setStyle("-fx-background-color: #FFFFFF;");
+        //root.setStyle("-fx-background-color: #FFFFFF;");
         Pane content = new Pane();
+        ScrollPane sp = new ScrollPane();
         content.setTranslateX(0);
         content.setTranslateY(31);
-        content.setPrefSize(width+30, height-51);
+        //content.setPrefSize(width+30, height-51);
+        content.prefHeight(Control.USE_COMPUTED_SIZE);
+        content.maxHeight(Double.POSITIVE_INFINITY);
         content.setStyle("-fx-background-color: #FFFFFF;");
         populateStrudels(content);
         
-        Text test = new Text("ASDF");
-        test.setFill(Color.BLACK);
-        test.setX(20);
-        test.setY(50);
-        test.setFont(test.getFont().font(20)); 
-        test.toFront();
-        root.getChildren().add(test);
         
         Pane footer = new Pane();
         footer.setPrefWidth(width+15);
         footer.setPrefHeight(30);
         footer.setTranslateY(height-18);
         footer.setStyle("-fx-background-color: #F0591E;");
-        header.toFront();
-        footer.toFront();
+        //header.toFront();
+        //footer.toFront();
         
-        root.getChildren().addAll(header, footer, content);
-        
+        root.getChildren().addAll(header, footer, sp);
+        sp.setContent(content);
+        sp.setPannable(true);
+        sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        sp.setTranslateX(0);
+        sp.setTranslateY(31);
+        sp.setPrefWidth(width+15);
+        sp.setPrefHeight(height-50);
+        sp.toBack();
         return root;
     }
     
     public Pane populateStrudels(Pane pane) {
         ArrayList<Strudel> strudels = logic.getTest();
-        int nextHeight = 0;
+        int nextHeight = -33;
         for (Strudel s : strudels) {
             Pane p = new Pane();
+            pane.getChildren().add(p);
             p.setTranslateX(0);
-            p.setTranslateY(nextHeight);
+            p.setTranslateY(nextHeight+3);
             p.setPrefSize(width+30, s.getHeight());
             p.setStyle("-fx-background-color: " + s.getColor());
-            setText(pane, s, nextHeight);
-            pane.getChildren().add(p);
             
-            nextHeight += s.getHeight();
+            setText(pane, s, nextHeight);
+            setVotes(pane, s, nextHeight);
+            setTime(pane, s, nextHeight);
+            //p.toBack();
+            
+            nextHeight += s.getHeight() + 3;
         }        
         return pane;
     }
@@ -74,10 +85,30 @@ public class strudelView {
     public void setText(Pane pane, Strudel s, int height) {
         Text t = new Text(s.getMessage());
         t.setX(10);
-        System.out.println(height);
-        t.setY(height);
+        t.setY(height+60);
         t.setFill(Color.WHITE);
+        //t.toFront();
         pane.getChildren().add(t);
+    }
+    
+    public void setVotes(Pane pane, Strudel s, int height) {
+        Text t = new Text(Integer.toString(s.getVotes()));
+        t.setX(width-20);
+        t.setY(height+60);
+        t.setFill(Color.WHITE);
+        //t.toFront();
+        t.setFont(t.getFont().font(20));
+        pane.getChildren().add(t);
+    }
+    
+    public void setTime(Pane pane, Strudel s, int height) {
+        Text t = new Text(logic.getTime(s));
+        t.setX(20);
+        t.setY(height+25);
+        t.setFill(Color.WHITE);
+        //t.toFront();
+        t.setFont(t.getFont().font(10));
+        pane.getChildren().add(t);        
     }
     
     public void setHeight(int height) {
