@@ -77,4 +77,12 @@ public class strudelLogic {
         }
     }
     
+    public void upVote(int id) {
+        System.out.println("Upvoted " + id);
+    }
+    
+    public void downVote(int id) {
+        System.out.println("Downvoted " + id);
+    }
+    
 }
