@@ -27,8 +27,9 @@ public class strudelView {
         Pane content = setContent();
         ScrollPane sp = setScrollPane();
         Pane footer = setFooter();
+        Pane addBtn = addBtn();
         
-        root.getChildren().addAll(header, footer, sp);
+        root.getChildren().addAll(header, footer, sp, addBtn);
         sp.setContent(content);
         return root;
     }
@@ -160,6 +161,22 @@ public class strudelView {
         content.setStyle("-fx-background-color: #FFFFFF;");
         populateStrudels(content);        
         return content;
+    }
+    
+    public Pane addBtn() {
+        Pane addBtn = new Pane();
+        addBtn.setTranslateX((width/2)-20);
+        addBtn.setTranslateY(height-80);
+        addBtn.setOnMouseClicked(event -> newStrudel());
+        Image addImg = new Image("asset/img/add.png");
+        ImageView addView = new ImageView();
+        addView.setImage(addImg);
+        addBtn.getChildren().add(addView);
+        return addBtn;
+    }
+    
+    public void newStrudel() {
+        System.out.println("new view");
     }
     
 }
