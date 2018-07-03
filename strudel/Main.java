@@ -12,9 +12,8 @@ public class Main extends Application {
       
     @Override
     public void start(Stage primaryStage) {
-        
         Scene scene = new Scene(view.initScene());
-        
+        view.setStage(primaryStage);
         primaryStage.setTitle("strudel");
         primaryStage.setResizable(false);
         primaryStage.setOnCloseRequest(e -> {

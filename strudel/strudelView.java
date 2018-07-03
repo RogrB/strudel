@@ -2,14 +2,17 @@ package strudel;
 
 import java.util.ArrayList;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Control;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class strudelView {
     
@@ -19,6 +22,7 @@ public class strudelView {
     Image upVoteImg = new Image("asset/img/upVoteFull.png");
     Image downVoteImg = new Image("asset/img/downVoteFull.png");
     strudelLogic logic = new strudelLogic();
+    Stage stage;
     
     public Parent initScene() {
         root.setPrefSize(width, height);
@@ -177,6 +181,53 @@ public class strudelView {
     
     public void newStrudel() {
         System.out.println("new view");
+        root = new Pane();
+        root.setPrefSize(width, height);
+        root.getChildren().removeAll();
+        Scene scene = new Scene(root);
+        Pane header = setWriteHeader();
+        Pane content = setWriteTextBox();
+        root.getChildren().addAll(header, content);
+        stage.setScene(scene);        
+        showStage();
+    }
+    
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+    
+    public void showStage() {
+        stage.show();
+    }
+    
+    public void reSetScene() {
+        Scene scene = new Scene(initScene());
+        stage.setScene(scene);
+        showStage();
+    }
+    
+    public Pane setWriteHeader() {
+        Pane header = new Pane();
+        header.setPrefWidth(width+15);
+        header.setPrefHeight(30);
+        header.setStyle("-fx-background-color: #FFFFFF;");
+        
+        return header;
+    }
+    
+    public Pane setWriteTextBox() {
+        String color = logic.getRandomColor();
+        Pane content = new Pane();
+        content.setPrefWidth(width);
+        content.setPrefHeight(height-29);
+        content.setTranslateY(31);
+        content.setStyle("-fx-background-color: #" + color);
+        TextArea ta = new TextArea();
+        ta.setPromptText("Share something with the world");
+        ta.setPrefSize(width, height-29);
+        ta.setStyle("-fx-control-inner-background:#" + color + "; -fx-font-family: Consolas; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #" + color + "; -fx-text-fill: #FFFFFF; ");
+        content.getChildren().add(ta);
+        return content;
     }
     
 }

@@ -2,6 +2,7 @@ package strudel;
 
 import java.util.Date;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class strudelLogic {
     
@@ -83,6 +84,33 @@ public class strudelLogic {
     
     public void downVote(int id) {
         System.out.println("Downvoted " + id);
+    }
+    
+    public String getRandomColor() {
+        String color;
+        Random rand = new Random();
+        int random = rand.nextInt((5 - 1)+1) + 1;
+        switch(random) {
+            case 1:
+                color = "242424";
+                break;
+            case 2:
+                color = "353535";
+                break;
+            case 3:
+                color = "454545";
+                break;
+            case 4:
+                color = "121212";
+                break;
+            case 5:
+                color = "202020";
+                break;                
+            default:
+                color = "FFFFFF";
+                break;
+        }
+        return color;
     }
     
 }
