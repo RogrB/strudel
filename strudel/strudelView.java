@@ -225,7 +225,7 @@ public class strudelView {
         TextArea ta = new TextArea();
         ta.setPromptText("Share something with the world");
         ta.setPrefSize(width, height-29);
-        ta.setStyle("-fx-control-inner-background:#" + color + "; -fx-font-family: Consolas; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #" + color + "; -fx-text-fill: #FFFFFF; ");
+        ta.setStyle("-fx-control-inner-background:#" + color + "; -fx-font-family: Consolas; -fx-text-fill: #FFFFFF; ");
         content.getChildren().add(ta);
         return content;
     }
