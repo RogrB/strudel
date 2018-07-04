@@ -14,6 +14,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import io.io;
+
 public class strudelView {
     
     private final int width = 360;
@@ -22,6 +24,7 @@ public class strudelView {
     Image upVoteImg = new Image("asset/img/upVoteFull.png");
     Image downVoteImg = new Image("asset/img/downVoteFull.png");
     strudelLogic logic = new strudelLogic();
+    io io = new io();
     Stage stage;
     
     public Parent initScene() {
@@ -144,7 +147,42 @@ public class strudelView {
         footer.setPrefWidth(width+15);
         footer.setPrefHeight(30);
         footer.setTranslateY(height-18);
-        footer.setStyle("-fx-background-color: #F0591E;");
+        footer.setStyle("-fx-background-color: #FFFFFF;");
+        
+        ImageView clock = new ImageView(new Image("asset/img/clock_highlight.png"));
+        clock.setFitWidth(20);
+        clock.setFitHeight(20);
+        clock.setX(50);
+        clock.setY(5);
+        Pane newPane = new Pane();
+        newPane.setOnMouseClicked(event -> sortNew());
+        newPane.getChildren().add(clock);
+        newPane.setPrefWidth(width/3);
+        newPane.setTranslateX(1);
+        
+        ImageView comment = new ImageView(new Image("asset/img/comment_regular.png"));
+        comment.setFitWidth(20);
+        comment.setFitHeight(20);
+        comment.setX(50);
+        comment.setY(5);
+        Pane commentPane = new Pane();
+        commentPane.setOnMouseClicked(event -> sortComment());
+        commentPane.getChildren().add(comment);
+        commentPane.setPrefWidth(width/3);
+        commentPane.setTranslateX(120);
+        
+        ImageView votes = new ImageView(new Image("asset/img/votes_regular.png"));
+        votes.setFitWidth(20);
+        votes.setFitHeight(20);
+        votes.setX(50);
+        votes.setY(5);
+        Pane votesPane = new Pane();
+        votesPane.setOnMouseClicked(event -> sortVotes());
+        votesPane.getChildren().add(votes);
+        votesPane.setPrefWidth(width/3);
+        votesPane.setTranslateX(240);
+        
+        footer.getChildren().addAll(newPane, commentPane, votesPane);
         return footer;
     }
     
@@ -152,7 +190,18 @@ public class strudelView {
         Pane header = new Pane();
         header.setPrefWidth(width+15);
         header.setPrefHeight(30);
-        header.setStyle("-fx-background-color: #000000;");        
+        header.setStyle("-fx-background-color: #FFFFFF;");
+        ImageView logo = new ImageView(new Image("asset/img/strudel.png"));
+        logo.setX((width/2)-35);
+        Text karma = new Text("My Karma");
+        karma.setFont(karma.getFont().font(10));
+        karma.setX(width-50);
+        karma.setY(25);
+        Text karmaNbr = new Text(Integer.toString(io.getKarma()));
+        karmaNbr.setX(width-40);
+        karmaNbr.setY(15);
+        karmaNbr.setFont(karmaNbr.getFont().font(18));
+        header.getChildren().addAll(logo, karma, karmaNbr);
         return header;
     }
     
@@ -228,6 +277,18 @@ public class strudelView {
         ta.setStyle("-fx-control-inner-background:#" + color + "; -fx-font-family: Consolas; -fx-text-fill: #FFFFFF; ");
         content.getChildren().add(ta);
         return content;
+    }
+    
+    public void sortNew() {
+        System.out.println("Sorting by new");
+    }
+    
+    public void sortComment() {
+        System.out.println("Sorting by comments");
+    }
+    
+    public void sortVotes() {
+        System.out.println("Soring by votes");
     }
     
 }
