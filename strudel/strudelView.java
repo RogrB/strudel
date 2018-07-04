@@ -26,8 +26,10 @@ public class strudelView {
     strudelLogic logic = new strudelLogic();
     io io = new io();
     Stage stage;
+    TextArea ta = new TextArea();
     
     public Parent initScene() {
+        root = new Pane();
         root.setPrefSize(width, height);
         
         Pane header = setHeader();
@@ -42,7 +44,8 @@ public class strudelView {
     }
     
     public Pane populateStrudels(Pane pane) {
-        ArrayList<Strudel> strudels = logic.getTest();
+        logic.makeTest();
+        ArrayList<Strudel> strudels = logic.getStrudels();
         int nextHeight = -33;
         for (Strudel s : strudels) {
             Pane p = new Pane();
@@ -192,6 +195,9 @@ public class strudelView {
         header.setPrefHeight(30);
         header.setStyle("-fx-background-color: #FFFFFF;");
         ImageView logo = new ImageView(new Image("asset/img/strudel.png"));
+        Pane logoPane = new Pane();
+        logoPane.setOnMouseClicked(event -> reSetScene());
+        logoPane.getChildren().add(logo);
         logo.setX((width/2)-35);
         Text karma = new Text("My Karma");
         karma.setFont(karma.getFont().font(10));
@@ -201,7 +207,7 @@ public class strudelView {
         karmaNbr.setX(width-40);
         karmaNbr.setY(15);
         karmaNbr.setFont(karmaNbr.getFont().font(18));
-        header.getChildren().addAll(logo, karma, karmaNbr);
+        header.getChildren().addAll(logoPane, karma, karmaNbr);
         return header;
     }
     
@@ -250,6 +256,7 @@ public class strudelView {
     }
     
     public void reSetScene() {
+        System.out.println("reset scene");
         Scene scene = new Scene(initScene());
         stage.setScene(scene);
         showStage();
@@ -260,6 +267,25 @@ public class strudelView {
         header.setPrefWidth(width+15);
         header.setPrefHeight(30);
         header.setStyle("-fx-background-color: #FFFFFF;");
+        ImageView arrow = new ImageView(new Image("asset/img/arrow.png"));
+        arrow.setX(5);
+        arrow.setY(5);
+        Pane arrowPane = new Pane();
+        arrowPane.setOnMouseClicked(event-> reSetScene());
+        arrowPane.setPrefWidth(50);
+        arrowPane.getChildren().add(arrow);
+        
+        Text send = new Text("Send");
+        send.setFont(send.getFont().font(20));
+        Pane sendPane = new Pane();
+        sendPane.setPrefWidth(50);
+        sendPane.setOnMouseClicked(event-> post());
+        sendPane.getChildren().add(send);
+        sendPane.setTranslateX(width-60);
+        sendPane.setTranslateY(20);
+        
+        
+        header.getChildren().addAll(arrowPane, sendPane);
         
         return header;
     }
@@ -271,7 +297,6 @@ public class strudelView {
         content.setPrefHeight(height-29);
         content.setTranslateY(31);
         content.setStyle("-fx-background-color: #" + color);
-        TextArea ta = new TextArea();
         ta.setPromptText("Share something with the world");
         ta.setPrefSize(width, height-29);
         ta.setStyle("-fx-control-inner-background:#" + color + "; -fx-font-family: Consolas; -fx-text-fill: #FFFFFF; ");
@@ -289,6 +314,13 @@ public class strudelView {
     
     public void sortVotes() {
         System.out.println("Soring by votes");
+    }
+    
+    public void post() {
+        System.out.println("posting");
+        String message = ta.getText().replaceAll("\n", System.getProperty("line.separator"));
+        logic.post(message);
+        reSetScene();
     }
     
 }

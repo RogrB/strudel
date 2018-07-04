@@ -8,7 +8,11 @@ public class strudelLogic {
     
     private ArrayList<Strudel> strudel = new ArrayList<>();
     
-    public ArrayList<Strudel> getTest() {
+    public ArrayList<Strudel> getStrudels() {
+        return this.strudel;
+    }
+    
+    public void makeTest() {
         Date now = new Date();
         Strudel s1 = new Strudel();
         s1.setColor("#245455");
@@ -58,7 +62,6 @@ public class strudelLogic {
         strudel.add(s4);
         strudel.add(s5);
         strudel.add(s6);
-        return strudel;
     }
     
     public String getTime(Strudel s) {
@@ -111,6 +114,17 @@ public class strudelLogic {
                 break;
         }
         return color;
+    }
+    
+    public void post(String post) {
+        Strudel s = new Strudel();
+        Date now = new Date();
+        s.setColor("#852342");
+        s.setTime(now.getTime());
+        s.setMessage(post);
+        s.setVotes(0);
+        s.setHeight(100);
+        strudel.add(s);
     }
     
 }
