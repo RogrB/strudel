@@ -5,7 +5,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Control;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -23,12 +22,15 @@ public class strudelView {
     public Pane root = new Pane();
     Image upVoteImg = new Image("asset/img/upVoteFull.png");
     Image downVoteImg = new Image("asset/img/downVoteFull.png");
-    strudelLogic logic = new strudelLogic();
+    strudelLogic logic = strudelLogic.getInstance();
     io io = new io();
+    writeStrudelView writeStrudel = new writeStrudelView();
     Stage stage;
-    TextArea ta = new TextArea();
     
     public Parent initScene() {
+        writeStrudel.setView(this);
+        writeStrudel.setHeight(height);
+        writeStrudel.setWidth(width);
         root = new Pane();
         root.setPrefSize(width, height);
         
@@ -44,7 +46,6 @@ public class strudelView {
     }
     
     public Pane populateStrudels(Pane pane) {
-        logic.makeTest();
         ArrayList<Strudel> strudels = logic.getStrudels();
         int nextHeight = -33;
         for (Strudel s : strudels) {
@@ -124,6 +125,10 @@ public class strudelView {
         return this.height;
     }
     
+    public int getWidth() {
+        return this.width;
+    }
+    
     public void upVote(int id) {
         logic.upVote(id);
     }
@@ -155,7 +160,7 @@ public class strudelView {
         ImageView clock = new ImageView(new Image("asset/img/clock_highlight.png"));
         clock.setFitWidth(20);
         clock.setFitHeight(20);
-        clock.setX(50);
+        clock.setX(55);
         clock.setY(5);
         Pane newPane = new Pane();
         newPane.setOnMouseClicked(event -> sortNew());
@@ -166,7 +171,7 @@ public class strudelView {
         ImageView comment = new ImageView(new Image("asset/img/comment_regular.png"));
         comment.setFitWidth(20);
         comment.setFitHeight(20);
-        comment.setX(50);
+        comment.setX(55);
         comment.setY(5);
         Pane commentPane = new Pane();
         commentPane.setOnMouseClicked(event -> sortComment());
@@ -177,7 +182,7 @@ public class strudelView {
         ImageView votes = new ImageView(new Image("asset/img/votes_regular.png"));
         votes.setFitWidth(20);
         votes.setFitHeight(20);
-        votes.setX(50);
+        votes.setX(55);
         votes.setY(5);
         Pane votesPane = new Pane();
         votesPane.setOnMouseClicked(event -> sortVotes());
@@ -196,7 +201,7 @@ public class strudelView {
         header.setStyle("-fx-background-color: #FFFFFF;");
         ImageView logo = new ImageView(new Image("asset/img/strudel.png"));
         Pane logoPane = new Pane();
-        logoPane.setOnMouseClicked(event -> reSetScene());
+        logoPane.setOnMouseClicked(event -> resetScene());
         logoPane.getChildren().add(logo);
         logo.setX((width/2)-35);
         Text karma = new Text("My Karma");
@@ -235,14 +240,8 @@ public class strudelView {
     }
     
     public void newStrudel() {
-        System.out.println("new view");
-        root = new Pane();
-        root.setPrefSize(width, height);
-        root.getChildren().removeAll();
+        root = writeStrudel.init();
         Scene scene = new Scene(root);
-        Pane header = setWriteHeader();
-        Pane content = setWriteTextBox();
-        root.getChildren().addAll(header, content);
         stage.setScene(scene);        
         showStage();
     }
@@ -255,53 +254,10 @@ public class strudelView {
         stage.show();
     }
     
-    public void reSetScene() {
-        System.out.println("reset scene");
+    public void resetScene() {
         Scene scene = new Scene(initScene());
         stage.setScene(scene);
         showStage();
-    }
-    
-    public Pane setWriteHeader() {
-        Pane header = new Pane();
-        header.setPrefWidth(width+15);
-        header.setPrefHeight(30);
-        header.setStyle("-fx-background-color: #FFFFFF;");
-        ImageView arrow = new ImageView(new Image("asset/img/arrow.png"));
-        arrow.setX(5);
-        arrow.setY(5);
-        Pane arrowPane = new Pane();
-        arrowPane.setOnMouseClicked(event-> reSetScene());
-        arrowPane.setPrefWidth(50);
-        arrowPane.getChildren().add(arrow);
-        
-        Text send = new Text("Send");
-        send.setFont(send.getFont().font(20));
-        Pane sendPane = new Pane();
-        sendPane.setPrefWidth(50);
-        sendPane.setOnMouseClicked(event-> post());
-        sendPane.getChildren().add(send);
-        sendPane.setTranslateX(width-60);
-        sendPane.setTranslateY(20);
-        
-        
-        header.getChildren().addAll(arrowPane, sendPane);
-        
-        return header;
-    }
-    
-    public Pane setWriteTextBox() {
-        String color = logic.getRandomColor();
-        Pane content = new Pane();
-        content.setPrefWidth(width);
-        content.setPrefHeight(height-29);
-        content.setTranslateY(31);
-        content.setStyle("-fx-background-color: #" + color);
-        ta.setPromptText("Share something with the world");
-        ta.setPrefSize(width, height-29);
-        ta.setStyle("-fx-control-inner-background:#" + color + "; -fx-font-family: Consolas; -fx-text-fill: #FFFFFF; ");
-        content.getChildren().add(ta);
-        return content;
     }
     
     public void sortNew() {
@@ -313,14 +269,7 @@ public class strudelView {
     }
     
     public void sortVotes() {
-        System.out.println("Soring by votes");
-    }
-    
-    public void post() {
-        System.out.println("posting");
-        String message = ta.getText().replaceAll("\n", System.getProperty("line.separator"));
-        logic.post(message);
-        reSetScene();
+        System.out.println("Sorting by votes");
     }
     
 }

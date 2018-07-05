@@ -8,6 +8,14 @@ public class strudelLogic {
     
     private ArrayList<Strudel> strudel = new ArrayList<>();
     
+    private static final strudelLogic instance = new strudelLogic();
+    
+    private strudelLogic(){ makeTest(); }
+
+    public static strudelLogic getInstance(){
+        return instance;
+    }    
+    
     public ArrayList<Strudel> getStrudels() {
         return this.strudel;
     }

@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
     
-    public static strudelView view = new strudelView();
+    private static strudelView view =  new strudelView();
       
     @Override
     public void start(Stage primaryStage) {
