@@ -1,4 +1,4 @@
-package strudel;
+package strudel.view;
 
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
@@ -6,15 +6,17 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
-public class writeStrudelView {
+import strudel.logic.StrudelLogic;
+
+public class WriteStrudelWindow {
     
     TextArea textArea = new TextArea();
-    strudelLogic logic = strudelLogic.getInstance();
-    strudelView view;
+    StrudelLogic logic = StrudelLogic.getInstance();
+    StrudelView view;
     private int height;
     private int width;
     
-    public void setView(strudelView view) {
+    public void setView(StrudelView view) {
         this.view = view;
     }
     
