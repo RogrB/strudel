@@ -9,7 +9,7 @@ import io.io;
 import java.util.ArrayList;
 import javafx.scene.control.Control;
 import javafx.scene.paint.Color;
-import strudel.Strudel;
+import strudel.logic.Strudel;
 import strudel.logic.StrudelLogic;
 
 public class MainWindow {

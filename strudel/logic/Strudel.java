@@ -1,5 +1,5 @@
 
-package strudel;
+package strudel.logic;
 
 import java.util.Date;
 

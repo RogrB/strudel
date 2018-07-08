@@ -3,7 +3,7 @@ package strudel.logic;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.Random;
-import strudel.Strudel;
+import db.DBConnection;
 
 public class StrudelLogic {
     
@@ -22,6 +22,8 @@ public class StrudelLogic {
     }
     
     public void makeTest() {
+        DBConnection db = new DBConnection();
+        db.init();
         Date now = new Date();
         Strudel s1 = new Strudel();
         s1.setColor("#245455");
