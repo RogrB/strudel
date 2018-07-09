@@ -4,17 +4,16 @@ import java.sql.*;
 
 public class DBConnection {
    
-    private Connection myConnection;
+    private Connection connection;
 
     public void init(){
     
        try{
         
         Class.forName("com.mysql.jdbc.Driver");
-        myConnection=DriverManager.getConnection(
+        connection=DriverManager.getConnection(
                 "jdbc:mysql://localhost/strudel?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC","root",""
                 );
-        test(myConnection);
         }
         catch(Exception e){
             System.out.println("Failed to get connection");
@@ -23,8 +22,8 @@ public class DBConnection {
     }
     
     
-    public Connection getMyConnection(){
-        return myConnection;
+    public Connection getConnection(){
+        return connection;
     }
     
     
@@ -50,44 +49,14 @@ public class DBConnection {
         }
     }
      
-  public void destroy(){
-  
-    if(myConnection !=null){
-    
-         try{
-               myConnection.close();
-            }
-            catch(Exception e){}
-        
-        
-    }
-  }
-  
-  public void test(Connection connection) {
-      try {
-         Statement stmt = connection.createStatement();
-         String strSelect = "select * from strudel";
-         System.out.println("The SQL query is: " + strSelect);
-         System.out.println();
- 
-         ResultSet rset = stmt.executeQuery(strSelect);
- 
-         System.out.println("The records selected are:");
-         int rowCount = 0;
-         while(rset.next()) {
-            int id = rset.getInt("id");
-            long time = rset.getLong("time");
-            int votes = rset.getInt("votes");
-            int height = rset.getInt("height");
-            int color = rset.getInt("color");
-            String message = rset.getString("message");
-            System.out.println(id + ", " + time + ", " + votes + ", " + height + ", " + color + ", " + message);
-            ++rowCount;
-         }
-         System.out.println("Total number of records = " + rowCount);
- 
-      } catch(SQLException ex) {
-         ex.printStackTrace();      
+    public void destroy(){
+
+      if(connection !=null){
+
+           try{
+                 connection.close();
+              }
+              catch(Exception e){}
       }
-  }
+    }
 }

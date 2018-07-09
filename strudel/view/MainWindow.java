@@ -142,7 +142,7 @@ public class MainWindow {
     }   
     
     public Pane populateStrudels(Pane pane) {
-        ArrayList<Strudel> strudels = logic.getStrudels();
+        ArrayList<Strudel> strudels = logic.readStrudels();
         int nextHeight = -33;
         for (Strudel s : strudels) {
             Pane p = new Pane();
@@ -157,7 +157,6 @@ public class MainWindow {
             setTime(pane, s, nextHeight);
             setUpVote(pane, s, nextHeight);
             setDownVote(pane, s, nextHeight);
-            
             nextHeight += s.getHeight() + 3;
         }        
         return pane;

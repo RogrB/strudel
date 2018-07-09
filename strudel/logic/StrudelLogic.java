@@ -3,27 +3,25 @@ package strudel.logic;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.Random;
-import db.DBConnection;
+import db.DBController;
 
 public class StrudelLogic {
     
-    private ArrayList<Strudel> strudel = new ArrayList<>();
+    private ArrayList<Strudel> strudels = new ArrayList<>();
     
     private static final StrudelLogic instance = new StrudelLogic();
     
-    private StrudelLogic(){ makeTest(); }
+    private StrudelLogic(){ }
 
     public static StrudelLogic getInstance(){
         return instance;
     }    
     
     public ArrayList<Strudel> getStrudels() {
-        return this.strudel;
+        return this.strudels;
     }
     
     public void makeTest() {
-        DBConnection db = new DBConnection();
-        db.init();
         Date now = new Date();
         Strudel s1 = new Strudel();
         s1.setColor("#245455");
@@ -67,12 +65,12 @@ public class StrudelLogic {
         s6.setVotes(1);
         s6.setHeight(150);        
         
-        strudel.add(s1);
-        strudel.add(s2);
-        strudel.add(s3);
-        strudel.add(s4);
-        strudel.add(s5);
-        strudel.add(s6);
+        strudels.add(s1);
+        strudels.add(s2);
+        strudels.add(s3);
+        strudels.add(s4);
+        strudels.add(s5);
+        strudels.add(s6);
     }
     
     public String getTime(Strudel s) {
@@ -135,7 +133,14 @@ public class StrudelLogic {
         s.setMessage(post);
         s.setVotes(0);
         s.setHeight(100);
-        strudel.add(s);
+        DBController db = new DBController();
+        db.writeStrudel(s);
+    }
+    
+    public ArrayList<Strudel> readStrudels() {
+        DBController db = new DBController();
+        strudels = db.readStrudels();
+        return strudels;
     }
     
 }
