@@ -10,6 +10,7 @@ public class StrudelLogic {
     private ArrayList<Strudel> strudels = new ArrayList<>();
     
     private static final StrudelLogic instance = new StrudelLogic();
+    private DBController db = new DBController();
     
     private StrudelLogic(){ }
 
@@ -91,11 +92,11 @@ public class StrudelLogic {
     }
     
     public void upVote(int id) {
-        System.out.println("Upvoted " + id);
+        db.upVote(id);
     }
     
     public void downVote(int id) {
-        System.out.println("Downvoted " + id);
+        db.downVote(id);
     }
     
     public String getRandomColor() {
@@ -133,12 +134,10 @@ public class StrudelLogic {
         s.setMessage(post);
         s.setVotes(0);
         s.setHeight(100);
-        DBController db = new DBController();
         db.writeStrudel(s);
     }
     
     public ArrayList<Strudel> readStrudels() {
-        DBController db = new DBController();
         strudels = db.readStrudels();
         return strudels;
     }

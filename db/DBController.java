@@ -25,4 +25,16 @@ public class DBController {
         return strudels;
     }
     
+    public int readVotes(int id) {
+        return reader.readVotes(con, id);
+    }
+        
+    public void upVote(int id) {
+        writer.upVote(con, id);
+    }
+    
+    public void downVote(int id) {
+        writer.downVote(con, id);
+    }
+    
 }

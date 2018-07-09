@@ -193,7 +193,10 @@ public class MainWindow {
         ImageView upBtn = new ImageView();
         upBtn.setImage(upVoteImg);
         upVote.getChildren().add(upBtn);
-        upVote.setOnMouseClicked(event -> upVote(s.getID()));
+        upVote.setOnMouseClicked(event -> {
+            upVote(s.getID());
+            upBtn.setImage(new Image("asset/img/upVoteHalf.png"));
+                });
         upVote.setTranslateX(320);
         upVote.setTranslateY(height+15);
         upVote.setPrefSize(30, 30);
@@ -205,7 +208,10 @@ public class MainWindow {
         ImageView downBtn = new ImageView();
         downBtn.setImage(downVoteImg);
         downVote.getChildren().add(downBtn);
-        downVote.setOnMouseClicked(event -> downVote(s.getID()));
+        downVote.setOnMouseClicked(event -> {
+            downVote(s.getID());
+            downBtn.setImage(new Image("asset/img/downVoteHalf.png"));
+                });
         downVote.setTranslateX(320);
         downVote.setTranslateY(height+65);
         downVote.setPrefSize(30, 30);

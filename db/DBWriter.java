@@ -16,15 +16,38 @@ public class DBWriter {
             String sql = "insert into strudel (id,time,votes,height,color,message) "
                   + "values (DEFAULT, '" + strudel.getTime() + "', '" + strudel.getVotes() +"', '"
                   + strudel.getHeight() +"', '" + strudel.getColor() + "', '" + strudel.getMessage() + "');";
-            System.out.println("The SQL query is: " + sql);
-            int countInserted = stmt.executeUpdate(sql);
-            System.out.println(countInserted + " records inserted.\n");
+            //int countInserted = stmt.executeUpdate(sql);
+            stmt.executeUpdate(sql);
+            //System.out.println(countInserted + " records inserted.\n");
 
 
         } catch(SQLException ex) {
            ex.printStackTrace();      
         }
     }
-        
+    
+    public void upVote(Connection connection, int id) {
+        try {
+            Statement stmt = connection.createStatement();
+
+            String sql = "update strudel set votes = votes+1 where id = '" + id + "';";
+            stmt.executeUpdate(sql);
+
+        } catch(SQLException ex) {
+           ex.printStackTrace();      
+        }            
+    }
+
+    public void downVote(Connection connection, int id) {
+        try {
+            Statement stmt = connection.createStatement();
+
+            String sql = "update strudel set votes = votes-1 where id = '" + id + "';";
+            stmt.executeUpdate(sql);
+
+        } catch(SQLException ex) {
+           ex.printStackTrace();      
+        }            
+    }
     
 }
