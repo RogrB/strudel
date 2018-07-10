@@ -1,8 +1,4 @@
-
 package strudel.logic;
-
-import java.util.Date;
-
 
 public class Strudel {
     
@@ -13,6 +9,7 @@ public class Strudel {
     private String color;
     private String message;
     private boolean voted = false;
+    private int comments;
     
     public void setID(int id) {
         this.id = id;
@@ -68,6 +65,14 @@ public class Strudel {
     
     public boolean getVoted() {
         return this.voted;
+    }
+    
+    public void setComments(int comments) {
+        this.comments = comments;
+    }
+    
+    public int getComments() {
+        return this.comments;
     }
     
 }

@@ -8,7 +8,6 @@ import javafx.scene.text.Text;
 import io.io;
 import java.util.ArrayList;
 import javafx.scene.control.Control;
-import javafx.scene.paint.Color;
 import strudel.logic.Strudel;
 import strudel.logic.StrudelLogic;
 
