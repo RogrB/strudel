@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 import strudel.logic.StrudelLogic;
 import io.io;
 
-public class StrudelView {
+public class ViewController {
     
     private final int width = 360;
     private int height = 640;
@@ -20,11 +20,11 @@ public class StrudelView {
     WriteStrudelWindow writeStrudel = new WriteStrudelWindow();
     Stage stage;
     
-    private static final StrudelView instance = new StrudelView();
+    private static final ViewController instance = new ViewController();
     
-    private StrudelView(){ }
+    private ViewController(){ }
 
-    public static StrudelView getInstance(){
+    public static ViewController getInstance(){
         return instance;
     }        
     

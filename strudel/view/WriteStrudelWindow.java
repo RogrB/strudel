@@ -12,11 +12,11 @@ public class WriteStrudelWindow {
     
     TextArea textArea = new TextArea();
     StrudelLogic logic = StrudelLogic.getInstance();
-    StrudelView view;
+    ViewController view;
     private int height;
     private int width;
     
-    public void setView(StrudelView view) {
+    public void setView(ViewController view) {
         this.view = view;
     }
     

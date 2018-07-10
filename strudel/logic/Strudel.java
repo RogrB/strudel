@@ -12,7 +12,7 @@ public class Strudel {
     private int height;
     private String color;
     private String message;
-    private boolean voted;
+    private boolean voted = false;
     
     public void setID(int id) {
         this.id = id;

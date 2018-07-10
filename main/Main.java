@@ -5,13 +5,14 @@ import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import strudel.view.StrudelView;
+import strudel.view.ViewController;
 
+import static javafx.application.Application.launch;
 import static javafx.application.Application.launch;
 
 public class Main extends Application {
     
-    private static StrudelView view = StrudelView.getInstance();
+    private static ViewController view = ViewController.getInstance();
       
     @Override
     public void start(Stage primaryStage) {

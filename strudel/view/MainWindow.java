@@ -15,13 +15,10 @@ import strudel.logic.StrudelLogic;
 public class MainWindow {
     
     Pane root;
-    StrudelView view = StrudelView.getInstance();
+    ViewController view = ViewController.getInstance();
     io io = new io();
     StrudelLogic logic = StrudelLogic.getInstance();
-    
-    Image upVoteImg = new Image("asset/img/upVoteFull.png");
-    Image downVoteImg = new Image("asset/img/downVoteFull.png");
-    
+    ArrayList<StrudelRenderNode> renderNodes = new ArrayList();
     
     public Pane init() {
         root = new Pane();
@@ -145,85 +142,10 @@ public class MainWindow {
         ArrayList<Strudel> strudels = logic.readStrudels();
         int nextHeight = -33;
         for (Strudel s : strudels) {
-            Pane p = new Pane();
-            pane.getChildren().add(p);
-            p.setTranslateX(0);
-            p.setTranslateY(nextHeight+3);
-            p.setPrefSize(view.getWidth()+30, s.getHeight());
-            p.setStyle("-fx-background-color: " + s.getColor());
-            
-            setText(pane, s, nextHeight);
-            setVotes(pane, s, nextHeight);
-            setTime(pane, s, nextHeight);
-            setUpVote(pane, s, nextHeight);
-            setDownVote(pane, s, nextHeight);
+            renderNodes.add(new StrudelRenderNode(pane, s, nextHeight));
             nextHeight += s.getHeight() + 3;
         }        
         return pane;
     }
-    
-    public void setText(Pane pane, Strudel s, int height) {
-        Text t = new Text(s.getMessage());
-        t.setX(10);
-        t.setY(height+60);
-        t.setFill(Color.WHITE);
-        pane.getChildren().add(t);
-    }
-    
-    public void setVotes(Pane pane, Strudel s, int height) {
-        Text t = new Text(Integer.toString(s.getVotes()));
-        t.setX(view.getWidth()-30);
-        t.setY(height+62);
-        t.setFill(Color.WHITE);
-        t.setFont(t.getFont().font(20));
-        pane.getChildren().add(t);
-    }
-    
-    public void setTime(Pane pane, Strudel s, int height) {
-        Text t = new Text(logic.getTime(s));
-        t.setX(20);
-        t.setY(height+25);
-        t.setFill(Color.WHITE);
-        t.setFont(t.getFont().font(10));
-        pane.getChildren().add(t);        
-    }
-    
-    public void setUpVote(Pane pane, Strudel s, int height) {
-        Pane upVote = new Pane();
-        ImageView upBtn = new ImageView();
-        upBtn.setImage(upVoteImg);
-        upVote.getChildren().add(upBtn);
-        upVote.setOnMouseClicked(event -> {
-            upVote(s.getID());
-            upBtn.setImage(new Image("asset/img/upVoteHalf.png"));
-                });
-        upVote.setTranslateX(320);
-        upVote.setTranslateY(height+15);
-        upVote.setPrefSize(30, 30);
-        pane.getChildren().add(upVote);
-    }
-    
-    public void setDownVote(Pane pane, Strudel s, int height) {
-        Pane downVote = new Pane();
-        ImageView downBtn = new ImageView();
-        downBtn.setImage(downVoteImg);
-        downVote.getChildren().add(downBtn);
-        downVote.setOnMouseClicked(event -> {
-            downVote(s.getID());
-            downBtn.setImage(new Image("asset/img/downVoteHalf.png"));
-                });
-        downVote.setTranslateX(320);
-        downVote.setTranslateY(height+65);
-        downVote.setPrefSize(30, 30);
-        pane.getChildren().add(downVote);
-    }
-    
-    public void upVote(int id) {
-        logic.upVote(id);
-    }
-    
-    public void downVote(int id) {
-        logic.downVote(id);
-    }    
         
 }
