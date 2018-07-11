@@ -7,7 +7,7 @@ import strudel.logic.Strudel;
 public class DBController {
     
     DBConnection connection = new DBConnection();
-    DBRead reader = new DBRead();
+    DBReader reader = new DBReader();
     DBWriter writer = new DBWriter();
     Connection con;
     
@@ -35,6 +35,10 @@ public class DBController {
     
     public void downVote(int id) {
         writer.downVote(con, id);
+    }
+    
+    public int countComments(int id) {
+        return reader.countComments(con, id);
     }
     
 }

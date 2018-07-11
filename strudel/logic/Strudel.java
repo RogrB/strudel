@@ -63,7 +63,7 @@ public class Strudel {
         return this.message;
     }
     
-    public boolean getVoted() {
+    public boolean hasVoted() {
         return this.voted;
     }
     

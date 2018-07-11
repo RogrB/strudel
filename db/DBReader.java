@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import strudel.logic.Strudel;
 
 
-public class DBRead {
+public class DBReader {
     
   public ArrayList<Strudel> readStrudels(Connection connection) {
         ArrayList<Strudel> strudels = new ArrayList();
@@ -42,13 +42,28 @@ public class DBRead {
            String sql = "select votes from strudel where id = '" + id + "';";
 
            ResultSet rset = stmt.executeQuery(sql);
-
            votes = rset.getInt(sql);
 
         } catch(SQLException ex) {
            ex.printStackTrace();      
         }      
         return votes;
+  }
+  
+  public int countComments(Connection connection, int id) {
+      int comments = 0;
+        try {
+            Statement stmt = connection.createStatement();
+            String sql = "select count(*) as amount from comments where id = '" + id + "';";           
+            ResultSet rset = stmt.executeQuery(sql);
+            if(rset.next()) {
+                comments = rset.getInt("amount");
+            }
+
+        } catch(SQLException ex) {
+           ex.printStackTrace();      
+        }          
+      return comments;
   }
     
 }

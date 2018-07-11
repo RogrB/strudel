@@ -14,6 +14,7 @@ public class StrudelRenderNode {
     Pane parent;
     Strudel strudel;
     int height;
+    int comments;
     private final ViewController view = ViewController.getInstance();
     private final StrudelLogic logic = StrudelLogic.getInstance();
     Text message = new Text();
@@ -31,7 +32,8 @@ public class StrudelRenderNode {
         root.setTranslateX(0);
         root.setTranslateY(height+3);
         root.setPrefSize(view.getWidth()+30, strudel.getHeight());
-        root.setStyle("-fx-background-color: " + strudel.getColor());     
+        root.setStyle("-fx-background-color: " + strudel.getColor());   
+        root.setOnMouseClicked(event -> comment());
         
         init();
     }
@@ -41,8 +43,11 @@ public class StrudelRenderNode {
         setVotes();
         setTime();
         setUpVote();
-        setDownVote();           
-        setComment();
+        setDownVote();
+        this.comments = logic.countComments(strudel.getID());
+        if (comments > 0) {
+            setComment();
+        }
     }
     
 
@@ -66,7 +71,7 @@ public class StrudelRenderNode {
     public void setTime() {
         timeText.setText(logic.getTime(strudel));
         timeText.setX(20);
-        timeText.setY(height+25);
+        timeText.setY(height+20);
         timeText.setFill(Color.WHITE);
         timeText.setFont(timeText.getFont().font(10));
         parent.getChildren().add(timeText);        
@@ -94,20 +99,8 @@ public class StrudelRenderNode {
         parent.getChildren().add(downVotePane);
     }
     
-    public void setComment() {
-        Pane commentPane = new Pane();
-        ImageView commentImg = new ImageView();
-        commentImg.setImage(new Image("asset/img/commentCounter.png"));
-        commentPane.setTranslateX(10);
-        commentPane.setTranslateY(height+80);
-        commentImg.setFitHeight(15);
-        commentImg.setFitWidth(15);
-        commentPane.getChildren().add(commentImg);
-        parent.getChildren().add(commentPane);
-    }
-    
     public void upVote(Strudel strudel) {
-        if (!strudel.getVoted()) {
+        if (!strudel.hasVoted()) {
             voteNumber.setText(Integer.toString(strudel.getVotes()+1));
             logic.upVote(strudel.getID());
             downBtn.setImage(new Image("asset/img/downVoteHollow.png"));
@@ -117,13 +110,38 @@ public class StrudelRenderNode {
     }
     
     public void downVote(Strudel strudel) {
-        if (!strudel.getVoted()) {
+        if (!strudel.hasVoted()) {
             voteNumber.setText(Integer.toString(strudel.getVotes()-1));
             logic.downVote(strudel.getID());
             downBtn.setImage(new Image("asset/img/downVoteHalf.png"));
             upBtn.setImage(new Image("asset/img/upVoteHollow.png"));
             strudel.setVoted(true);
         }
+    }
+    
+    public void setComment() {
+        Pane commentPane = new Pane();
+        commentPane.setTranslateX(10);
+        commentPane.setTranslateY(height+strudel.getHeight()-20); 
+        commentPane.setOnMouseClicked(event -> comment());
+        
+        Text commentCount = new Text(Integer.toString(this.comments));
+        commentCount.setX(20);
+        commentCount.setY(height+strudel.getHeight()-55);
+        commentCount.setFill(Color.WHITE);
+        commentCount.setFont(commentCount.getFont().font(12));
+        
+        ImageView commentImg = new ImageView();
+        commentImg.setImage(new Image("asset/img/commentCounter.png"));
+        commentImg.setFitHeight(15);
+        commentImg.setFitWidth(15);
+        
+        commentPane.getChildren().addAll(commentImg, commentCount);
+        parent.getChildren().add(commentPane);
+    }   
+    
+    public void comment() {
+        System.out.println("comment view");
     }
     
 }
