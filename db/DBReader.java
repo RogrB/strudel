@@ -70,7 +70,10 @@ public class DBReader {
         ArrayList<Strudel> strudels = new ArrayList();
         try {
            Statement stmt = connection.createStatement();
-           String sql = "SELECT * from strudel order by (select count(*) from comments);";
+           String sql = "SELECT strudel.*, COUNT(comments.id) AS amount\n" +
+                        "FROM strudel LEFT JOIN comments ON strudel.id = comments.id\n" +
+                        "GROUP BY strudel.id\n" +
+                        "ORDER BY amount DESC";
 
            ResultSet rset = stmt.executeQuery(sql);
 
