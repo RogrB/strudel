@@ -13,7 +13,7 @@ public class StrudelRenderNode {
     private Pane root = new Pane();
     Pane parent;
     Strudel strudel;
-    int height;
+    int y;
     int comments;
     private final ViewController view = ViewController.getInstance();
     private final StrudelLogic logic = StrudelLogic.getInstance();
@@ -24,13 +24,13 @@ public class StrudelRenderNode {
     ImageView upBtn = new ImageView();
     ImageView downBtn = new ImageView();
     
-    public StrudelRenderNode(Pane pane, Strudel strudel, int height) {
+    public StrudelRenderNode(Pane pane, Strudel strudel, int y) {
         this.parent = pane;
         this.strudel = strudel;
-        this.height = height;
+        this.y = y;
         pane.getChildren().add(root);
         root.setTranslateX(0);
-        root.setTranslateY(height+3);
+        root.setTranslateY(y+3);
         root.setPrefSize(view.getWidth()+30, strudel.getHeight());
         root.setStyle("-fx-background-color: " + strudel.getColor());   
         root.setOnMouseClicked(event -> comment());
@@ -54,7 +54,7 @@ public class StrudelRenderNode {
     public void setText() {
         message.setText(strudel.getMessage());
         message.setX(10);
-        message.setY(height+60);
+        message.setY(y+60);
         message.setFill(Color.WHITE);
         parent.getChildren().add(message);
     }
@@ -62,7 +62,7 @@ public class StrudelRenderNode {
     public void setVotes() {
         voteNumber.setText(Integer.toString(strudel.getVotes()));
         voteNumber.setX(view.getWidth()-30);
-        voteNumber.setY(height+62);
+        voteNumber.setY(y+62);
         voteNumber.setFill(Color.WHITE);
         voteNumber.setFont(voteNumber.getFont().font(20));
         parent.getChildren().add(voteNumber);
@@ -71,7 +71,7 @@ public class StrudelRenderNode {
     public void setTime() {
         timeText.setText(logic.getTime(strudel));
         timeText.setX(20);
-        timeText.setY(height+20);
+        timeText.setY(y+20);
         timeText.setFill(Color.WHITE);
         timeText.setFont(timeText.getFont().font(10));
         parent.getChildren().add(timeText);        
@@ -83,7 +83,7 @@ public class StrudelRenderNode {
         upVotePane.getChildren().add(upBtn);
         upVotePane.setOnMouseClicked(event -> upVote(strudel));
         upVotePane.setTranslateX(320);
-        upVotePane.setTranslateY(height+15);
+        upVotePane.setTranslateY(y+15);
         upVotePane.setPrefSize(30, 30);
         parent.getChildren().add(upVotePane);
     }
@@ -94,7 +94,7 @@ public class StrudelRenderNode {
         downVotePane.getChildren().add(downBtn);
         downVotePane.setOnMouseClicked(event -> downVote(strudel));
         downVotePane.setTranslateX(320);
-        downVotePane.setTranslateY(height+65);
+        downVotePane.setTranslateY(y+65);
         downVotePane.setPrefSize(30, 30);
         parent.getChildren().add(downVotePane);
     }
@@ -122,12 +122,12 @@ public class StrudelRenderNode {
     public void setComment() {
         Pane commentPane = new Pane();
         commentPane.setTranslateX(10);
-        commentPane.setTranslateY(height+strudel.getHeight()-20); 
+        commentPane.setTranslateY(y+strudel.getHeight()-20); 
         commentPane.setOnMouseClicked(event -> comment());
         
         Text commentCount = new Text(Integer.toString(this.comments));
         commentCount.setX(20);
-        commentCount.setY(height+strudel.getHeight()-55);
+        commentCount.setY(y+strudel.getHeight()-55);
         commentCount.setFill(Color.WHITE);
         commentCount.setFont(commentCount.getFont().font(12));
         

@@ -41,4 +41,16 @@ public class DBController {
         return reader.countComments(con, id);
     }
     
+    public ArrayList<Strudel> sortComments() {
+        return reader.sortComments(con);
+    }
+    
+    public ArrayList<Strudel> sortNew() {
+        return reader.sortNew(con);
+    }
+    
+    public ArrayList<Strudel> sortVotes() {
+        return reader.sortVotes(con);
+    }    
+    
 }

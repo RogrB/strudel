@@ -25,12 +25,12 @@ public class MainWindow {
         
         Pane header = setHeader();
         Pane content = setContent();
-        ScrollPane sp = setScrollPane();
+        ScrollPane scrollPane = setScrollPane();
         Pane footer = setFooter();
         Pane addBtn = addBtn();
         
-        root.getChildren().addAll(header, footer, sp, addBtn);
-        sp.setContent(content);
+        root.getChildren().addAll(header, footer, scrollPane, addBtn);
+        scrollPane.setContent(content);
         
         return root;
     }
@@ -138,11 +138,11 @@ public class MainWindow {
     }   
     
     public Pane populateStrudels(Pane pane) {
-        ArrayList<Strudel> strudels = logic.readStrudels();
-        int nextHeight = -33;
-        for (Strudel s : strudels) {
-            renderNodes.add(new StrudelRenderNode(pane, s, nextHeight));
-            nextHeight += s.getHeight() + 3;
+        ArrayList<Strudel> strudels = logic.getStrudels();
+        int y = -33;
+        for (Strudel strudel : strudels) {
+            renderNodes.add(new StrudelRenderNode(pane, strudel, y));
+            y += strudel.getHeight() + 3;
         }        
         return pane;
     }

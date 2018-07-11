@@ -7,12 +7,12 @@ import db.DBController;
 
 public class StrudelLogic {
     
-    private ArrayList<Strudel> strudels = new ArrayList<>();
+    private ArrayList<Strudel> strudels;
     
     private static final StrudelLogic instance = new StrudelLogic();
     private DBController db = new DBController();
     
-    private StrudelLogic(){ }
+    private StrudelLogic(){ strudels = db.readStrudels(); }
 
     public static StrudelLogic getInstance(){
         return instance;
@@ -92,6 +92,18 @@ public class StrudelLogic {
     
     public int countComments(int id) {
         return db.countComments(id);
+    }
+    
+    public void sortNew() {
+        strudels = db.sortNew();
+    }
+    
+    public void sortComments() {
+        strudels = db.sortComments();
+    }
+    
+    public void sortVotes() {
+        strudels = db.sortVotes();
     }
     
 }

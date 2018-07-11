@@ -72,15 +72,18 @@ public class ViewController {
     }
     
     public void sortNew() {
-        System.out.println("Sorting by new");
+        logic.sortNew();
+        resetScene();
     }
     
     public void sortComment() {
-        System.out.println("Sorting by comments");
+        logic.sortComments();
+        resetScene();
     }
     
     public void sortVotes() {
-        System.out.println("Sorting by votes");
+        logic.sortVotes();
+        resetScene();
     }
     
 }
