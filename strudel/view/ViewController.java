@@ -58,6 +58,7 @@ public class ViewController {
     }
     
     public void viewComments(int id) {
+        root.getChildren().removeAll();
         CommentWindow commentWindow = new CommentWindow(id);
         root = commentWindow.init();
         Scene scene = new Scene(root);
@@ -79,18 +80,18 @@ public class ViewController {
         showStage();
     }
     
-    public void sortNew() {
-        logic.sortNew();
+    public void sortByNewest() {
+        logic.sortByNewest();
         resetScene();
     }
     
-    public void sortComment() {
-        logic.sortComments();
+    public void sortByComments() {
+        logic.sortByComments();
         resetScene();
     }
     
-    public void sortVotes() {
-        logic.sortVotes();
+    public void sortByVotes() {
+        logic.sortByVotes();
         resetScene();
     }
     

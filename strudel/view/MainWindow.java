@@ -18,6 +18,9 @@ public class MainWindow {
     io io = new io();
     StrudelLogic logic = StrudelLogic.getInstance();
     ArrayList<StrudelRenderNode> renderNodes = new ArrayList();
+    ImageView sortByCommentsImage = new ImageView(new Image("asset/img/comment_regular.png"));
+    ImageView sortByVotesImage = new ImageView(new Image("asset/img/votes_regular.png"));
+    ImageView sortByNewestImage = new ImageView(new Image("asset/img/clock_highlight.png"));
     
     public Pane init() {
         root = new Pane();
@@ -64,36 +67,33 @@ public class MainWindow {
         footer.setTranslateY(view.getHeight()-18);
         footer.setStyle("-fx-background-color: #FFFFFF;");
         
-        ImageView clock = new ImageView(new Image("asset/img/clock_highlight.png"));
-        clock.setFitWidth(20);
-        clock.setFitHeight(20);
-        clock.setX(55);
-        clock.setY(5);
+        sortByNewestImage.setFitWidth(20);
+        sortByNewestImage.setFitHeight(20);
+        sortByNewestImage.setX(55);
+        sortByNewestImage.setY(5);
         Pane newPane = new Pane();
-        newPane.setOnMouseClicked(event -> view.sortNew());
-        newPane.getChildren().add(clock);
+        newPane.setOnMouseClicked(event -> sortByNewest());
+        newPane.getChildren().add(sortByNewestImage);
         newPane.setPrefWidth(view.getWidth()/3);
         newPane.setTranslateX(1);
         
-        ImageView comment = new ImageView(new Image("asset/img/comment_regular.png"));
-        comment.setFitWidth(20);
-        comment.setFitHeight(20);
-        comment.setX(55);
-        comment.setY(5);
+        sortByCommentsImage.setFitWidth(20);
+        sortByCommentsImage.setFitHeight(20);
+        sortByCommentsImage.setX(55);
+        sortByCommentsImage.setY(5);
         Pane commentPane = new Pane();
-        commentPane.setOnMouseClicked(event -> view.sortComment());
-        commentPane.getChildren().add(comment);
+        commentPane.setOnMouseClicked(event -> sortByComments());
+        commentPane.getChildren().add(sortByCommentsImage);
         commentPane.setPrefWidth(view.getWidth()/3);
         commentPane.setTranslateX(120);
         
-        ImageView votes = new ImageView(new Image("asset/img/votes_regular.png"));
-        votes.setFitWidth(20);
-        votes.setFitHeight(20);
-        votes.setX(55);
-        votes.setY(5);
+        sortByVotesImage.setFitWidth(20);
+        sortByVotesImage.setFitHeight(20);
+        sortByVotesImage.setX(55);
+        sortByVotesImage.setY(5);
         Pane votesPane = new Pane();
-        votesPane.setOnMouseClicked(event -> view.sortVotes());
-        votesPane.getChildren().add(votes);
+        votesPane.setOnMouseClicked(event -> sortByVotes());
+        votesPane.getChildren().add(sortByVotesImage);
         votesPane.setPrefWidth(view.getWidth()/3);
         votesPane.setTranslateX(240);
         
@@ -113,16 +113,16 @@ public class MainWindow {
     }    
     
     public ScrollPane setScrollPane() {
-        ScrollPane sp = new ScrollPane();
-        sp.setPannable(false);
-        sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-        sp.setTranslateX(0);
-        sp.setTranslateY(31);
-        sp.setPrefWidth(view.getWidth()+15);
-        sp.setPrefHeight(view.getHeight()-50);
-        sp.toBack();
-        return sp;        
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setPannable(false);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        scrollPane.setTranslateX(0);
+        scrollPane.setTranslateY(31);
+        scrollPane.setPrefWidth(view.getWidth()+15);
+        scrollPane.setPrefHeight(view.getHeight()-50);
+        scrollPane.toBack();
+        return scrollPane;        
     }    
     
     public Pane addBtn() {
@@ -145,6 +145,27 @@ public class MainWindow {
             y += strudel.getHeight() + 3;
         }        
         return pane;
+    }
+    
+    public void sortByComments() {
+        sortByCommentsImage.setImage(new Image("asset/img/comment_highlight.png"));
+        view.sortByComments();
+        //sortByVotesImage.setImage(new Image("asset/img/votes_regular"));
+        //sortByNewestImage.setImage(new Image("asset/img/clock_regular"));
+    }
+    
+    public void sortByNewest() {
+        //sortByNewestImage.setImage(new Image("asset/img/clock_highlight"));
+        view.sortByNewest();
+        //sortByVotesImage.setImage(new Image("asset/img/votes_regular"));
+        //sortByCommentsImage.setImage(new Image("asset/img/comment_regular.png"));
+    }
+    
+    public void sortByVotes() {
+        sortByVotesImage.setImage(new Image("asset/img/votes_highlight"));
+        view.sortByVotes();
+        //sortByCommentsImage.setImage(new Image("asset/img/comment_regular.png"));
+        //sortByNewestImage.setImage(new Image("asset/img/clock_regular"));
     }
         
 }

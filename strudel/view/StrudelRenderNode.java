@@ -10,7 +10,7 @@ import strudel.logic.StrudelLogic;
 
 public class StrudelRenderNode {
     
-    private Pane root = new Pane();
+    private Pane localRoot = new Pane();
     Pane parent;
     Strudel strudel;
     int y;
@@ -28,12 +28,12 @@ public class StrudelRenderNode {
         this.parent = pane;
         this.strudel = strudel;
         this.y = y;
-        pane.getChildren().add(root);
-        root.setTranslateX(0);
-        root.setTranslateY(y+3);
-        root.setPrefSize(view.getWidth()+30, strudel.getHeight());
-        root.setStyle("-fx-background-color: " + strudel.getColor());   
-        root.setOnMouseClicked(event -> comment());
+        pane.getChildren().add(localRoot);
+        localRoot.setTranslateX(0);
+        localRoot.setTranslateY(y+3);
+        localRoot.setPrefSize(view.getWidth()+30, strudel.getHeight());
+        localRoot.setStyle("-fx-background-color: " + strudel.getColor());   
+        localRoot.setOnMouseClicked(event -> comment());
         
         init();
     }

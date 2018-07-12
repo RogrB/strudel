@@ -94,20 +94,28 @@ public class StrudelLogic {
         return db.countComments(id);
     }
     
-    public void sortNew() {
-        strudels = db.sortNew();
+    public void sortByNewest() {
+        strudels = db.sortByNewest();
     }
     
-    public void sortComments() {
-        strudels = db.sortComments();
+    public void sortByComments() {
+        strudels = db.sortByComments();
     }
     
-    public void sortVotes() {
-        strudels = db.sortVotes();
+    public void sortByVotes() {
+        strudels = db.sortByVotes();
     }
     
     public ArrayList<Strudel> getComments(int id) {
         return db.getComments(id);
+    }
+    
+    public void upVoteComment(int id) {
+        System.out.println("upvoted comment " + id);
+    }
+    
+    public void downVoteComment(int id) {
+        System.out.println("downvoted comment " + id);
     }
     
 }

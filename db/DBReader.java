@@ -66,7 +66,7 @@ public class DBReader {
       return comments;
   }
   
-  public ArrayList<Strudel> sortComments(Connection connection) {
+  public ArrayList<Strudel> sortByComments(Connection connection) {
         ArrayList<Strudel> strudels = new ArrayList();
         try {
            Statement stmt = connection.createStatement();
@@ -94,7 +94,7 @@ public class DBReader {
       return strudels;      
   }
   
-  public ArrayList<Strudel> sortNew(Connection connection) {
+  public ArrayList<Strudel> sortByNewest(Connection connection) {
         ArrayList<Strudel> strudels = new ArrayList();
         try {
            Statement stmt = connection.createStatement();
@@ -119,7 +119,7 @@ public class DBReader {
       return strudels;      
   }  
   
-  public ArrayList<Strudel> sortVotes(Connection connection) {
+  public ArrayList<Strudel> sortByVotes(Connection connection) {
         ArrayList<Strudel> strudels = new ArrayList();
         try {
            Statement stmt = connection.createStatement();
@@ -144,29 +144,28 @@ public class DBReader {
       return strudels;      
   }  
   
-  public ArrayList<Strudel> getComments(Connection connection, int id) {
-        ArrayList<Strudel> strudels = new ArrayList();
-        try {
-           Statement stmt = connection.createStatement();
-           String sql = "select * from comments where id = '" + id + "' order by time desc;";
+    public ArrayList<Strudel> getComments(Connection connection, int id) {
+          ArrayList<Strudel> strudels = new ArrayList();
+          try {
+             Statement stmt = connection.createStatement();
+             String sql = "select * from comments where id = '" + id + "' order by time desc;";
+             ResultSet rset = stmt.executeQuery(sql);
 
-           ResultSet rset = stmt.executeQuery(sql);
+             while(rset.next()) {
+                Strudel strudel = new Strudel();
+                strudel.setID(rset.getInt("id"));
+                strudel.setTime(rset.getLong("time"));
+                strudel.setVotes(rset.getInt("votes"));
+                strudel.setHeight(rset.getInt("height"));
+                strudel.setColor(rset.getString("color"));
+                strudel.setMessage(rset.getString("message"));
+                strudels.add(strudel);
+             }
 
-           while(rset.next()) {
-              Strudel strudel = new Strudel();
-              strudel.setID(rset.getInt("id"));
-              strudel.setTime(rset.getLong("time"));
-              strudel.setVotes(rset.getInt("votes"));
-              strudel.setHeight(rset.getInt("height"));
-              strudel.setColor(rset.getString("color"));
-              strudel.setMessage(rset.getString("message"));
-              strudels.add(strudel);
-           }
-
-        } catch(SQLException ex) {
-           ex.printStackTrace();      
-        }
-      return strudels;      
-  }    
+          } catch(SQLException ex) {
+             ex.printStackTrace();      
+          }
+        return strudels;      
+    }    
     
 }

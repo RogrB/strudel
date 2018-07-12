@@ -2,6 +2,7 @@ package strudel.view;
 
 import java.util.ArrayList;
 import javafx.scene.control.Control;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -13,7 +14,7 @@ public class CommentWindow {
     ArrayList<StrudelRenderNode> renderNodes = new ArrayList();
     TextArea textArea = new TextArea();
     StrudelLogic logic = StrudelLogic.getInstance();
-    ViewController view;
+    ViewController view = ViewController.getInstance();
     private int height;
     private int width;
     private String color;
@@ -39,8 +40,10 @@ public class CommentWindow {
         Pane root = new Pane();
         root.setPrefSize(width, height);
         Pane content = setContent();
+        ScrollPane scrollPane = setScrollPane();
         Pane footer = setFooter();
-        root.getChildren().addAll(content, footer);
+        root.getChildren().addAll(scrollPane, footer);
+        scrollPane.setContent(content);
         return root;
     }
     
@@ -59,9 +62,9 @@ public class CommentWindow {
         ArrayList<Strudel> strudels = logic.getComments(id);
         int y = -33;
         for (Strudel strudel : strudels) {
-            renderNodes.add(new StrudelRenderNode(pane, strudel, y));
+            renderNodes.add(new CommentRenderNode(pane, strudel, y));
             y += strudel.getHeight() + 3;
-        }        
+        }
         return pane;
     }
     
@@ -96,6 +99,19 @@ public class CommentWindow {
         content.getChildren().add(textArea);
         return content;
     }    
+    
+    public ScrollPane setScrollPane() {
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setPannable(false);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        scrollPane.setTranslateX(0);
+        scrollPane.setTranslateY(31);
+        scrollPane.setPrefWidth(view.getWidth()+15);
+        scrollPane.setPrefHeight(view.getHeight()-50);
+        scrollPane.toBack();
+        return scrollPane;        
+    }        
     
     public void post() {
         String message = textArea.getText().replaceAll("\n", System.getProperty("line.separator"));
