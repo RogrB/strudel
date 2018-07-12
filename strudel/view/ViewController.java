@@ -14,10 +14,10 @@ public class ViewController {
     private final int width = 360;
     private int height = 640;
     public Pane root = new Pane();
+    private String sortedBy = "newest";
 
     StrudelLogic logic = StrudelLogic.getInstance();
     io io = new io();
-    WriteStrudelWindow writeStrudel = new WriteStrudelWindow();
     Stage stage;
     
     private static final ViewController instance = new ViewController();
@@ -31,10 +31,6 @@ public class ViewController {
     public Parent initScene() {
         MainWindow mainWindow = new MainWindow();
         root = mainWindow.init();
-        writeStrudel.setView(this);
-        writeStrudel.setHeight(height);
-        writeStrudel.setWidth(width);
-        
         return root;
     }
     
@@ -51,6 +47,7 @@ public class ViewController {
     }
     
     public void newStrudel() {
+        WriteStrudelWindow writeStrudel = new WriteStrudelWindow(width, height);
         root = writeStrudel.init();
         Scene scene = new Scene(root);
         stage.setScene(scene);       
@@ -93,6 +90,14 @@ public class ViewController {
     public void sortByVotes() {
         logic.sortByVotes();
         resetScene();
+    }
+    
+    public void setSortedBy(String sortedBy) {
+        this.sortedBy = sortedBy;
+    }
+    
+    public String getSortedBy() {
+        return this.sortedBy;
     }
     
 }

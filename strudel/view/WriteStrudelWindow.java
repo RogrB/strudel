@@ -17,8 +17,10 @@ public class WriteStrudelWindow {
     private int width;
     private String color;
     
-    public void setView(ViewController view) {
-        this.view = view;
+    public WriteStrudelWindow(int width, int height) {
+        view = ViewController.getInstance();
+        this.width = width;
+        this.height = height;
     }
     
     public void setHeight(int height) {
