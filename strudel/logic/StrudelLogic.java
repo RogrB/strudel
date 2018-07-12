@@ -53,36 +53,36 @@ public class StrudelLogic {
         int random = rand.nextInt((5 - 1)+1) + 1;
         switch(random) {
             case 1:
-                color = "242424";
+                color = "#242424";
                 break;
             case 2:
-                color = "353535";
+                color = "#353535";
                 break;
             case 3:
-                color = "454545";
+                color = "#454545";
                 break;
             case 4:
-                color = "121212";
+                color = "#121212";
                 break;
             case 5:
-                color = "202020";
+                color = "#202020";
                 break;                
             default:
-                color = "FFFFFF";
+                color = "#FFFFFF";
                 break;
         }
         return color;
     }
     
-    public void post(String post) {
-        Strudel s = new Strudel();
+    public void post(String post, String color) {
+        Strudel strudel = new Strudel();
         Date now = new Date();
-        s.setColor("#852342");
-        s.setTime(now.getTime());
-        s.setMessage(post);
-        s.setVotes(0);
-        s.setHeight(100);
-        db.writeStrudel(s);
+        strudel.setTime(now.getTime());
+        strudel.setColor(color);
+        strudel.setMessage(post);
+        strudel.setVotes(0);
+        strudel.setHeight(100);
+        db.writeStrudel(strudel);
     }
     
     public ArrayList<Strudel> readStrudels() {
@@ -104,6 +104,10 @@ public class StrudelLogic {
     
     public void sortVotes() {
         strudels = db.sortVotes();
+    }
+    
+    public ArrayList<Strudel> getComments(int id) {
+        return db.getComments(id);
     }
     
 }

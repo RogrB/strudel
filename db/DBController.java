@@ -53,4 +53,8 @@ public class DBController {
         return reader.sortVotes(con);
     }    
     
+    public ArrayList<Strudel> getComments(int id) {
+        return reader.getComments(con, id);
+    }
+    
 }

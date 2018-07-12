@@ -15,6 +15,7 @@ public class WriteStrudelWindow {
     ViewController view;
     private int height;
     private int width;
+    private String color;
     
     public void setView(ViewController view) {
         this.view = view;
@@ -29,6 +30,7 @@ public class WriteStrudelWindow {
     }
     
     public Pane init() {
+        this.color = logic.getRandomColor();
         Pane root = new Pane();
         root.setPrefSize(width, height);
         Pane header = setWriteHeader();
@@ -71,17 +73,17 @@ public class WriteStrudelWindow {
         content.setPrefWidth(width);
         content.setPrefHeight(height-29);
         content.setTranslateY(31);
-        content.setStyle("-fx-background-color: #" + color);
+        content.setStyle("-fx-background-color: " + color);
         textArea.setPromptText("Share something with the world");
         textArea.setPrefSize(width, height-29);
-        textArea.setStyle("-fx-control-inner-background:#" + color + "; -fx-font-family: Consolas; -fx-text-fill: #FFFFFF; ");
+        textArea.setStyle("-fx-control-inner-background:" + color + "; -fx-font-family: Consolas; -fx-text-fill: #FFFFFF; ");
         content.getChildren().add(textArea);
         return content;
     }    
     
     public void post() {
         String message = textArea.getText().replaceAll("\n", System.getProperty("line.separator"));
-        logic.post(message);
+        logic.post(message, color);
         textArea.clear();
         view.resetScene();
     }    

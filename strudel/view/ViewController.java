@@ -57,6 +57,14 @@ public class ViewController {
         showStage();
     }
     
+    public void viewComments(int id) {
+        CommentWindow commentWindow = new CommentWindow(id);
+        root = commentWindow.init();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        showStage();
+    }
+    
     public void setStage(Stage stage) {
         this.stage = stage;
     }

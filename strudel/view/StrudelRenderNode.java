@@ -141,7 +141,7 @@ public class StrudelRenderNode {
     }   
     
     public void comment() {
-        System.out.println("comment view");
+        view.viewComments(strudel.getID());
     }
     
 }
