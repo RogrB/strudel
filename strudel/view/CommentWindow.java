@@ -11,7 +11,7 @@ import strudel.logic.StrudelLogic;
 
 public class CommentWindow {
     
-    ArrayList<StrudelRenderNode> renderNodes = new ArrayList();
+    ArrayList<MainWindowRenderNode> renderNodes = new ArrayList();
     TextArea textArea = new TextArea();
     StrudelLogic logic = StrudelLogic.getInstance();
     ViewController view = ViewController.getInstance();
@@ -24,19 +24,9 @@ public class CommentWindow {
         this.id = id;
     }
     
-    public void setView(ViewController view) {
-        this.view = view;
-    }
-    
-    public void setHeight(int height) {
-        this.height = height;
-    }
-    
-    public void setWidth(int width) {
-        this.width = width;
-    }
-    
     public Pane init() {
+        this.height = view.getHeight();
+        this.width = view.getWidth();
         Pane root = new Pane();
         root.setPrefSize(width, height);
         Pane content = setContent();

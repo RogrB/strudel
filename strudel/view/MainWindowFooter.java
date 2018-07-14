@@ -16,7 +16,7 @@ public class MainWindowFooter {
     }
     
     public void setSortByImages() {
-        String sortBy = view.getSortedBy();
+        String sortBy = view.getSortBy();
         switch(sortBy) {
             case "comments":
                 sortByCommentsImage.setImage(new Image("asset/img/comment_highlight.png"));            
@@ -91,19 +91,19 @@ public class MainWindowFooter {
     }
     
     public void sortByComments() {
-        view.setSortedBy("comments");
+        view.setSortBy("comments");
         view.sortByComments();
 
     }
     
     public void sortByNewest() {
-        view.setSortedBy("newest");
+        view.setSortBy("newest");
         view.sortByNewest();
 
     }
     
     public void sortByVotes() {
-        view.setSortedBy("votes");
+        view.setSortBy("votes");
         view.sortByVotes();
     }
     

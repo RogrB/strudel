@@ -8,7 +8,7 @@ import javafx.scene.text.Text;
 import strudel.logic.Strudel;
 import strudel.logic.StrudelLogic;
 
-public class StrudelRenderNode {
+public class MainWindowRenderNode {
     
     private Pane localRoot = new Pane();
     Pane parent;
@@ -24,7 +24,7 @@ public class StrudelRenderNode {
     ImageView upBtn = new ImageView();
     ImageView downBtn = new ImageView();
     
-    public StrudelRenderNode(Pane pane, Strudel strudel, int y) {
+    public MainWindowRenderNode(Pane pane, Strudel strudel, int y) {
         this.parent = pane;
         this.strudel = strudel;
         this.y = y;

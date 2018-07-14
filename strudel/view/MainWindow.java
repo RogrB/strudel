@@ -4,7 +4,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
 import io.io;
 import java.util.ArrayList;
 import javafx.scene.control.Control;
@@ -17,15 +16,15 @@ public class MainWindow {
     ViewController view = ViewController.getInstance();
     io io = new io();
     StrudelLogic logic = StrudelLogic.getInstance();
-    ArrayList<StrudelRenderNode> renderNodes = new ArrayList();
+    Pane content = new Pane();
+    ArrayList<MainWindowRenderNode> renderNodes = new ArrayList();
     
     public Pane init() {
         root = new Pane();
         root.setPrefSize(view.getWidth(), view.getHeight());
-        
         MainWindowHeader header = new MainWindowHeader();
         Pane headerPane = header.setHeader();
-        Pane content = setContent();
+        content = setContent();
         ScrollPane scrollPane = setScrollPane();
         MainWindowFooter footer = new MainWindowFooter();
         Pane footerPane = footer.setFooter();
@@ -37,8 +36,12 @@ public class MainWindow {
         return root;
     }
     
+    /*
+    public void updateContent() {
+        populateStrudels(content);
+    }*/
+    
     public Pane setContent() {
-        Pane content = new Pane();
         content.setTranslateX(0);
         content.setTranslateY(31);
         content.prefHeight(Control.USE_COMPUTED_SIZE);
@@ -77,7 +80,7 @@ public class MainWindow {
         ArrayList<Strudel> strudels = logic.getStrudels();
         int y = -33;
         for (Strudel strudel : strudels) {
-            renderNodes.add(new StrudelRenderNode(pane, strudel, y));
+            renderNodes.add(new MainWindowRenderNode(pane, strudel, y));
             y += strudel.getHeight() + 3;
         }        
         return pane;

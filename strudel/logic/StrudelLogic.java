@@ -90,6 +90,10 @@ public class StrudelLogic {
         return strudels;
     }
     
+    public void upDateStrudelsFromDB() {
+        strudels = db.readStrudels();
+    }
+    
     public int countComments(int id) {
         return db.countComments(id);
     }
@@ -111,11 +115,11 @@ public class StrudelLogic {
     }
     
     public void upVoteComment(int id) {
-        System.out.println("upvoted comment " + id);
+        System.out.println("Not implemented - upvoted comment " + id);
     }
     
     public void downVoteComment(int id) {
-        System.out.println("downvoted comment " + id);
+        System.out.println("Not implemented - downvoted comment " + id);
     }
     
 }

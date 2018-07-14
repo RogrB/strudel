@@ -86,6 +86,7 @@ public class WriteStrudelWindow {
     public void post() {
         String message = textArea.getText().replaceAll("\n", System.getProperty("line.separator"));
         logic.post(message, color);
+        logic.upDateStrudelsFromDB();
         textArea.clear();
         view.resetScene();
     }    

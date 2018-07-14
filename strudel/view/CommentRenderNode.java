@@ -5,7 +5,7 @@ import javafx.scene.layout.Pane;
 import strudel.logic.Strudel;
 import strudel.logic.StrudelLogic;
 
-public class CommentRenderNode extends StrudelRenderNode {
+public class CommentRenderNode extends MainWindowRenderNode {
     
     StrudelLogic logic = StrudelLogic.getInstance();
     
@@ -33,6 +33,16 @@ public class CommentRenderNode extends StrudelRenderNode {
             upBtn.setImage(new Image("asset/img/upVoteHollow.png"));
             strudel.setVoted(true);
         }
-    }    
+    }
+    
+    @Override
+    public void comment() {
+        
+    }
+    
+    @Override
+    public void setComment() {
+        
+    }
     
 }

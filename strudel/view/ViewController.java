@@ -14,7 +14,7 @@ public class ViewController {
     private final int width = 360;
     private int height = 640;
     public Pane root = new Pane();
-    private String sortedBy = "newest";
+    private String sortBy = "newest";
 
     StrudelLogic logic = StrudelLogic.getInstance();
     io io = new io();
@@ -55,12 +55,12 @@ public class ViewController {
     }
     
     public void viewComments(int id) {
-        root.getChildren().removeAll();
         CommentWindow commentWindow = new CommentWindow(id);
         root = commentWindow.init();
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        showStage();
+        stage.show();
+        //showStage();
     }
     
     public void setStage(Stage stage) {
@@ -92,12 +92,12 @@ public class ViewController {
         resetScene();
     }
     
-    public void setSortedBy(String sortedBy) {
-        this.sortedBy = sortedBy;
+    public void setSortBy(String sortedBy) {
+        this.sortBy = sortedBy;
     }
     
-    public String getSortedBy() {
-        return this.sortedBy;
+    public String getSortBy() {
+        return this.sortBy;
     }
     
 }
