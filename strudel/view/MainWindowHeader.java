@@ -1,6 +1,6 @@
 package strudel.view;
 
-import io.io;
+import io.ioController;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -10,7 +10,7 @@ import javafx.scene.text.Text;
 public class MainWindowHeader {
     
     ViewController view = ViewController.getInstance();
-    io io = new io();
+    ioController io = new ioController();
     
     public Pane setHeader() {
         Pane header = new Pane();
