@@ -19,10 +19,22 @@ public class StrudelLogic {
     private StrudelLogic(){ 
         strudels = db.readStrudels();
         readStrudelData();
+        compareStrudelData();
     }
     
     public void readStrudelData() {
         strudelData = io.readStrudelData();
+    }
+    
+    public void compareStrudelData() {
+        for (Strudel strudel : strudels) {
+            for(StrudelData data: strudelData) {
+                if (strudel.getID() == data.getID()) {
+                    strudel.setVoted(true);
+                    strudel.setVoteDirection(data.getVote());
+                }
+            }
+        }
     }    
 
     public static StrudelLogic getInstance(){
@@ -114,14 +126,20 @@ public class StrudelLogic {
     
     public void sortByNewest() {
         strudels = db.sortByNewest();
+        readStrudelData();
+        compareStrudelData();
     }
     
     public void sortByComments() {
         strudels = db.sortByComments();
+        readStrudelData();
+        compareStrudelData();
     }
     
     public void sortByVotes() {
         strudels = db.sortByVotes();
+        readStrudelData();
+        compareStrudelData();
     }
     
     public ArrayList<Strudel> getComments(int id) {

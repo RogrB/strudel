@@ -59,8 +59,7 @@ public class ViewController {
         root = commentWindow.init();
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        stage.show();
-        //showStage();
+        showStage();
     }
     
     public void setStage(Stage stage) {

@@ -10,6 +10,7 @@ public class Strudel {
     private String message;
     private boolean voted = false;
     private int comments;
+    private String voteDirection;
     
     public void setID(int id) {
         this.id = id;
@@ -73,6 +74,14 @@ public class Strudel {
     
     public int getComments() {
         return this.comments;
+    }
+    
+    public void setVoteDirection(String vote) {
+        this.voteDirection = vote;
+    }
+    
+    public String getVoteDirection() {
+        return this.voteDirection;
     }
     
 }
