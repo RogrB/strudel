@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.ArrayList;
 import java.util.Random;
 import db.DBController;
+import io.ioController;
 
 public class StrudelLogic {
     
@@ -11,6 +12,7 @@ public class StrudelLogic {
     
     private static final StrudelLogic instance = new StrudelLogic();
     private DBController db = new DBController();
+    private ioController io = new ioController();
     
     private StrudelLogic(){ strudels = db.readStrudels(); }
 
@@ -41,10 +43,14 @@ public class StrudelLogic {
     
     public void upVote(int id) {
         db.upVote(id);
+        io.setKarma(io.getKarma()+10);
+        io.writeKarma();
     }
     
     public void downVote(int id) {
         db.downVote(id);
+        io.setKarma(io.getKarma()-10);
+        io.writeKarma();
     }
     
     public String getRandomColor() {

@@ -7,7 +7,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import strudel.logic.StrudelLogic;
-import io.io;
+import io.ioReader;
 
 public class ViewController {
     
@@ -17,7 +17,7 @@ public class ViewController {
     private String sortBy = "newest";
 
     StrudelLogic logic = StrudelLogic.getInstance();
-    io io = new io();
+    ioReader io = new ioReader();
     Stage stage;
     
     private static final ViewController instance = new ViewController();

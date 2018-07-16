@@ -4,7 +4,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import io.io;
+import io.ioReader;
 import java.util.ArrayList;
 import javafx.scene.control.Control;
 import strudel.logic.Strudel;
@@ -14,7 +14,7 @@ public class MainWindow {
     
     Pane root;
     ViewController view = ViewController.getInstance();
-    io io = new io();
+    ioReader io = new ioReader();
     StrudelLogic logic = StrudelLogic.getInstance();
     Pane content = new Pane();
     ArrayList<MainWindowRenderNode> renderNodes = new ArrayList();

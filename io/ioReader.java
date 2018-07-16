@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class io {  
+public class ioReader {  
   
     public static List<String> readWords(String filename) throws IOException {
         DataInputStream dis = new DataInputStream(new BufferedInputStream(new FileInputStream(filename)));
@@ -21,28 +21,15 @@ public class io {
             words.add(dis.readUTF());
         return words;
     }
-
-    public static void writeStrings(String filename, List<String> words) throws IOException {
-        DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(filename)));
-        dos.writeInt(words.size());
-        for (String word : words)
-            dos.writeUTF(word);
-        dos.close();
+    
+    public int readKarma(String filename) throws IOException {
+        DataInputStream dis = new DataInputStream(new BufferedInputStream(new FileInputStream(filename)));
+        return dis.readInt();
     }
     
     public boolean checkIfDataFileExists(String dataPath) {
         File dataFile = new File(dataPath);
         return dataFile.exists();
     }
-  
-  /*
-  public static void main(String... aArgs) throws IOException{
-    final static String FILE_NAME = "C:\\Temp\\cottage.jpg";
-    final static String OUTPUT_FILE_NAME = "C:\\Temp\\cottage_output.jpg";    
-    io binary = new io();
-    byte[] bytes = binary.readSmallBinaryFile(FILE_NAME);
-    log("Small - size of file read in:" + bytes.length);
-    binary.writeSmallBinaryFile(bytes, OUTPUT_FILE_NAME);
-  }*/  
   
 }  
