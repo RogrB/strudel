@@ -36,7 +36,7 @@ public class CommentRenderNode extends MainWindowRenderNode {
     }
     
     @Override
-    public void comment() {
+    public void comment(Strudel strudel) {
         
     }
     

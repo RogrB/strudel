@@ -33,7 +33,7 @@ public class MainWindowRenderNode {
         localRoot.setTranslateY(y+3);
         localRoot.setPrefSize(view.getWidth()+30, strudel.getHeight());
         localRoot.setStyle("-fx-background-color: " + strudel.getColor());   
-        localRoot.setOnMouseClicked(event -> comment());
+        localRoot.setOnMouseClicked(event -> comment(strudel));
         
         init();
     }
@@ -147,7 +147,7 @@ public class MainWindowRenderNode {
         Pane commentPane = new Pane();
         commentPane.setTranslateX(10);
         commentPane.setTranslateY(y+strudel.getHeight()-20); 
-        commentPane.setOnMouseClicked(event -> comment());
+        commentPane.setOnMouseClicked(event -> comment(strudel));
         
         Text commentCount = new Text(Integer.toString(this.comments));
         commentCount.setX(20);
@@ -164,8 +164,8 @@ public class MainWindowRenderNode {
         parent.getChildren().add(commentPane);
     }   
     
-    public void comment() {
-        view.viewComments(strudel.getID());
+    public void comment(Strudel strudel) {
+        view.viewComments(strudel);
     }
     
 }

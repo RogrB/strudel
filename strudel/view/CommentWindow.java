@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import javafx.scene.control.Control;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import strudel.logic.Strudel;
@@ -17,11 +19,10 @@ public class CommentWindow {
     ViewController view = ViewController.getInstance();
     private int height;
     private int width;
-    private String color;
-    private final int id;
+    private Strudel strudel;
     
-    public CommentWindow(int id) {
-        this.id = id;
+    public CommentWindow(Strudel strudel) {
+        this.strudel = strudel;
     }
     
     public Pane init() {
@@ -32,7 +33,9 @@ public class CommentWindow {
         Pane content = setContent();
         ScrollPane scrollPane = setScrollPane();
         Pane footer = setFooter();
-        root.getChildren().addAll(scrollPane, footer);
+        Pane header = setHeader();
+        //root.setStyle("-fx-background-color: " + color + ";");
+        root.getChildren().addAll(scrollPane, footer, header);
         scrollPane.setContent(content);
         return root;
     }
@@ -43,14 +46,15 @@ public class CommentWindow {
         content.setTranslateY(31);
         content.prefHeight(Control.USE_COMPUTED_SIZE);
         content.maxHeight(Double.POSITIVE_INFINITY);
-        content.setStyle("-fx-background-color: #FFFFFF;");
         populateStrudels(content);        
         return content;
     }       
     
     public Pane populateStrudels(Pane pane) {
-        ArrayList<Strudel> strudels = logic.getComments(id);
+        ArrayList<Strudel> strudels = logic.getComments(strudel.getID());
         int y = -33;
+        renderNodes.add(new CommentRenderNode(pane, strudel, y));
+        y += strudel.getHeight()+2;
         for (Strudel strudel : strudels) {
             renderNodes.add(new CommentRenderNode(pane, strudel, y));
             y += strudel.getHeight() + 3;
@@ -70,8 +74,8 @@ public class CommentWindow {
         sendPane.setPrefWidth(50);
         sendPane.setOnMouseClicked(event-> post());
         sendPane.getChildren().add(send);
-        sendPane.setTranslateX(width-60);
-        sendPane.setTranslateY(height-30);
+        sendPane.setTranslateX(width-52);
+        sendPane.setTranslateY(height-12);
         
         Pane textBoxPane = setTextBox();
         footer.getChildren().addAll(sendPane, textBoxPane);
@@ -85,7 +89,7 @@ public class CommentWindow {
         content.setPrefHeight(30);
         content.setTranslateY(height-30);
         textArea.setPromptText("Strudel back here..");
-        textArea.setPrefSize(width, 30);
+        textArea.setPrefSize(width-60, 30);
         content.getChildren().add(textArea);
         return content;
     }    
@@ -99,13 +103,31 @@ public class CommentWindow {
         scrollPane.setTranslateY(31);
         scrollPane.setPrefWidth(view.getWidth()+15);
         scrollPane.setPrefHeight(view.getHeight()-50);
+        scrollPane.setStyle("-fx-background-color: " + strudel.getColor() + ";");
         scrollPane.toBack();
         return scrollPane;        
-    }        
+    }      
+    
+    public Pane setHeader() {
+        Pane header = new Pane();
+        header.setPrefWidth(width+15);
+        header.setPrefHeight(30);
+        header.setStyle("-fx-background-color: #FFFFFF;");
+        ImageView arrow = new ImageView(new Image("asset/img/arrow.png"));
+        arrow.setX(5);
+        arrow.setY(5);
+        Pane arrowPane = new Pane();
+        arrowPane.setOnMouseClicked(event-> view.resetScene());
+        arrowPane.setPrefWidth(50);
+        arrowPane.getChildren().add(arrow);
+        
+        header.getChildren().add(arrowPane);
+        return header;
+    }
     
     public void post() {
         String message = textArea.getText().replaceAll("\n", System.getProperty("line.separator"));
-        logic.post(message, color);
+        //logic.post(message, strudel.getColor());
         textArea.clear();
         view.resetScene();
     }

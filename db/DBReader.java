@@ -14,7 +14,7 @@ public class DBReader {
         ArrayList<Strudel> strudels = new ArrayList();
         try {
            Statement stmt = connection.createStatement();
-           String sql = "select * from strudel order by time desc;";
+           String sql = "select * from strudel order by time desc limit 50;";
 
            ResultSet rset = stmt.executeQuery(sql);
 
@@ -73,7 +73,7 @@ public class DBReader {
            String sql = "SELECT strudel.*, COUNT(comments.id) AS amount\n" +
                         "FROM strudel LEFT JOIN comments ON strudel.id = comments.id\n" +
                         "GROUP BY strudel.id\n" +
-                        "ORDER BY amount DESC";
+                        "ORDER BY amount DESC limit 50";
 
            ResultSet rset = stmt.executeQuery(sql);
 
@@ -98,7 +98,7 @@ public class DBReader {
         ArrayList<Strudel> strudels = new ArrayList();
         try {
            Statement stmt = connection.createStatement();
-           String sql = "select * from strudel order by time desc;";
+           String sql = "select * from strudel order by time desc limit 50;";
 
            ResultSet rset = stmt.executeQuery(sql);
 
@@ -123,7 +123,7 @@ public class DBReader {
         ArrayList<Strudel> strudels = new ArrayList();
         try {
            Statement stmt = connection.createStatement();
-           String sql = "select * from strudel order by votes desc;";
+           String sql = "select * from strudel order by votes desc limit 50;";
 
            ResultSet rset = stmt.executeQuery(sql);
 

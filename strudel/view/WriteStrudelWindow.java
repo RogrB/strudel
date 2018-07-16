@@ -70,7 +70,6 @@ public class WriteStrudelWindow {
     }
     
     public Pane setWriteTextBox() {
-        String color = logic.getRandomColor();
         Pane content = new Pane();
         content.setPrefWidth(width);
         content.setPrefHeight(height-29);

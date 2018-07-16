@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 
 import strudel.logic.StrudelLogic;
 import io.ioReader;
+import strudel.logic.Strudel;
 
 public class ViewController {
     
@@ -54,8 +55,8 @@ public class ViewController {
         showStage();
     }
     
-    public void viewComments(int id) {
-        CommentWindow commentWindow = new CommentWindow(id);
+    public void viewComments(Strudel strudel) {
+        CommentWindow commentWindow = new CommentWindow(strudel);
         root = commentWindow.init();
         Scene scene = new Scene(root);
         stage.setScene(scene);
