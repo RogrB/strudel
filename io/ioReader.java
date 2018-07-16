@@ -1,25 +1,24 @@
 package io;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class ioReader {  
   
-    public static List<String> readWords(String filename) throws IOException {
+    public ArrayList<StrudelData> readStrudelData(String filename) throws IOException {
         DataInputStream dis = new DataInputStream(new BufferedInputStream(new FileInputStream(filename)));
-        int count = dis.readInt();
-        List<String> words = new ArrayList<String>(count);
-        while (words.size() < count)
-            words.add(dis.readUTF());
-        return words;
+        ArrayList<StrudelData> data = new ArrayList<>();
+        while (dis.available() > 0) {
+            int id = dis.readInt();
+            String vote = dis.readUTF();
+            StrudelData strudel = new StrudelData(id, vote);
+            data.add(strudel);
+        }
+        return data;
     }
     
     public int readKarma(String filename) throws IOException {
@@ -31,5 +30,5 @@ public class ioReader {
         File dataFile = new File(dataPath);
         return dataFile.exists();
     }
-  
+
 }  

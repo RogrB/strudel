@@ -5,16 +5,25 @@ import java.util.ArrayList;
 import java.util.Random;
 import db.DBController;
 import io.ioController;
+import io.StrudelData;
 
 public class StrudelLogic {
     
     private ArrayList<Strudel> strudels;
+    private ArrayList<StrudelData> strudelData;
     
     private static final StrudelLogic instance = new StrudelLogic();
     private DBController db = new DBController();
     private ioController io = new ioController();
     
-    private StrudelLogic(){ strudels = db.readStrudels(); }
+    private StrudelLogic(){ 
+        strudels = db.readStrudels();
+        readStrudelData();
+    }
+    
+    public void readStrudelData() {
+        strudelData = io.readStrudelData();
+    }    
 
     public static StrudelLogic getInstance(){
         return instance;
@@ -43,14 +52,12 @@ public class StrudelLogic {
     
     public void upVote(int id) {
         db.upVote(id);
-        io.setKarma(io.getKarma()+10);
-        io.writeKarma();
+        io.upVote(id);
     }
     
     public void downVote(int id) {
         db.downVote(id);
-        io.setKarma(io.getKarma()-10);
-        io.writeKarma();
+        io.downVote(id);
     }
     
     public String getRandomColor() {
@@ -127,6 +134,10 @@ public class StrudelLogic {
     
     public void downVoteComment(int id) {
         System.out.println("Not implemented - downvoted comment " + id);
+    }
+    
+    public ArrayList<StrudelData> getStrudelData() {
+        return strudelData;
     }
     
 }

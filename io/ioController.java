@@ -2,6 +2,7 @@ package io;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ioController {
     
@@ -13,6 +14,7 @@ public class ioController {
     
     public ioController() {
         initKarma();
+        initData();
     }
     
     public void initKarma() {
@@ -25,6 +27,18 @@ public class ioController {
                 File karmaFile = new File(karmaPath);
                 karmaFile.createNewFile();
                 writer.writeKarma(karmaPath, karma);
+            }
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void initData() {
+        try {
+            if (!reader.checkIfDataFileExists(dataPath)) {
+                File dataFile = new File(dataPath);
+                dataFile.createNewFile();
             }
         }
         catch(IOException e) {
@@ -48,6 +62,39 @@ public class ioController {
         catch(IOException e) {
             e.printStackTrace();
         }
+    }
+    
+    public void upVote(int id) {
+        this.karma += 10;
+        writeStrudelData(id, "up");
+        writeKarma();
+    }
+    
+    public void downVote(int id) {
+        this.karma -= 10;
+        writeStrudelData(id, "down");
+        writeKarma();
+    }
+    
+    public void writeStrudelData(int id, String vote) {
+        try {
+            StrudelData data = new StrudelData(id, vote);
+            writer.writeStrudelData(dataPath, data);
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public ArrayList<StrudelData> readStrudelData() {
+        ArrayList<StrudelData> data = new ArrayList<>();
+        try {
+            data = reader.readStrudelData(dataPath);
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+        }
+        return data;
     }
     
 }
