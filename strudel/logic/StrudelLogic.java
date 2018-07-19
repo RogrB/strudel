@@ -72,6 +72,16 @@ public class StrudelLogic {
         io.downVote(id);
     }
     
+    public void upVoteComment(int id) {
+        System.out.println("upvote");
+        db.upVoteComment(id);
+    }
+    
+    public void downVoteComment(int id) {
+        System.out.println("downvote");
+        db.downVoteComment(id);
+    }    
+    
     public String getRandomColor() {
         String color;
         Random rand = new Random();
@@ -142,16 +152,8 @@ public class StrudelLogic {
         compareStrudelData();
     }
     
-    public ArrayList<Strudel> getComments(int id) {
+    public ArrayList<StrudelComment> getComments(int id) {
         return db.getComments(id);
-    }
-    
-    public void upVoteComment(int id) {
-        System.out.println("Not implemented - upvoted comment " + id);
-    }
-    
-    public void downVoteComment(int id) {
-        System.out.println("Not implemented - downvoted comment " + id);
     }
     
     public ArrayList<StrudelData> getStrudelData() {

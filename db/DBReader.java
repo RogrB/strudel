@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import strudel.logic.Strudel;
+import strudel.logic.StrudelComment;
 
 
 public class DBReader {
@@ -56,16 +57,17 @@ public class DBReader {
         return getStrudelsFromDB(connection, sql);
     }  
   
-    public ArrayList<Strudel> getComments(Connection connection, int id) {
+    public ArrayList<StrudelComment> getComments(Connection connection, int id) {
         String sql = "select * from comments where id = '" + id + "' order by time desc;";
-        ArrayList<Strudel> strudels = new ArrayList();
+        ArrayList<StrudelComment> strudels = new ArrayList();
           try {
              Statement stmt = connection.createStatement();
              ResultSet rset = stmt.executeQuery(sql);
 
              while(rset.next()) {
-                Strudel strudel = new Strudel();
+                StrudelComment strudel = new StrudelComment();
                 strudel.setID(rset.getInt("id"));
+                strudel.setCommentID(rset.getInt("commentID"));
                 strudel.setTime(rset.getLong("time"));
                 strudel.setVotes(rset.getInt("votes"));
                 strudel.setHeight(rset.getInt("height"));

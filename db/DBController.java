@@ -3,6 +3,7 @@ package db;
 import java.sql.Connection;
 import java.util.ArrayList;
 import strudel.logic.Strudel;
+import strudel.logic.StrudelComment;
 
 public class DBController {
     
@@ -37,6 +38,14 @@ public class DBController {
         writer.downVote(con, id);
     }
     
+    public void downVoteComment(int id) {
+        writer.downVoteComment(con, id);
+    }
+    
+    public void upVoteComment(int id) {
+        writer.upVoteComment(con, id);
+    }
+    
     public int countComments(int id) {
         return reader.countComments(con, id);
     }
@@ -53,7 +62,7 @@ public class DBController {
         return reader.sortByVotes(con);
     }    
     
-    public ArrayList<Strudel> getComments(int id) {
+    public ArrayList<StrudelComment> getComments(int id) {
         return reader.getComments(con, id);
         
     }

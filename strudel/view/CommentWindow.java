@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import strudel.logic.Strudel;
+import strudel.logic.StrudelComment;
 import strudel.logic.StrudelLogic;
 
 public class CommentWindow {
@@ -19,7 +20,7 @@ public class CommentWindow {
     ViewController view = ViewController.getInstance();
     private int height;
     private int width;
-    private Strudel strudel;
+    private final Strudel strudel;
     
     public CommentWindow(Strudel strudel) {
         this.strudel = strudel;
@@ -51,13 +52,13 @@ public class CommentWindow {
     }       
     
     public Pane populateStrudels(Pane pane) {
-        ArrayList<Strudel> strudels = logic.getComments(strudel.getID());
+        ArrayList<StrudelComment> strudels = logic.getComments(strudel.getID());
         int y = -33;
-        renderNodes.add(new CommentRenderNode(pane, strudel, y));
+        renderNodes.add(new MainWindowRenderNode(pane, strudel, y));
         y += strudel.getHeight()+2;
-        for (Strudel strudel : strudels) {
-            renderNodes.add(new CommentRenderNode(pane, strudel, y));
-            y += strudel.getHeight() + 3;
+        for (StrudelComment strudelComment : strudels) {
+            renderNodes.add(new CommentRenderNode(pane, strudelComment, y));
+            y += strudelComment.getHeight() + 3;
         }
         return pane;
     }
