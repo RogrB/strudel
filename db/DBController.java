@@ -17,7 +17,7 @@ public class DBController {
     }
     
     public void writeStrudel(Strudel strudel) {
-        writer.write(con, strudel);
+        writer.writeStrudelToDB(con, strudel);
     }
     
     public ArrayList<Strudel> readStrudels() {
