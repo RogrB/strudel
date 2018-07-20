@@ -47,7 +47,7 @@ public class CommentWindow {
         content.setTranslateY(31);
         content.prefHeight(Control.USE_COMPUTED_SIZE);
         content.maxHeight(Double.POSITIVE_INFINITY);
-        populateStrudels(content);        
+        populateStrudels(content);
         return content;
     }       
     
@@ -65,8 +65,10 @@ public class CommentWindow {
     
     public Pane setFooter() {
         Pane footer = new Pane();
-        footer.setPrefWidth(width+15);
+        footer.setPrefWidth(width-52);
         footer.setPrefHeight(30);
+        footer.setTranslateX(1);
+        footer.setTranslateY(height-40);
         footer.setStyle("-fx-background-color: #FFFFFF;");
         
         Text send = new Text("Send");
@@ -76,7 +78,7 @@ public class CommentWindow {
         sendPane.setOnMouseClicked(event-> post());
         sendPane.getChildren().add(send);
         sendPane.setTranslateX(width-52);
-        sendPane.setTranslateY(height-12);
+        sendPane.setTranslateY(20);
         
         Pane textBoxPane = setTextBox();
         footer.getChildren().addAll(sendPane, textBoxPane);
@@ -85,14 +87,14 @@ public class CommentWindow {
     }
     
     public Pane setTextBox() {
-        Pane content = new Pane();
-        content.setPrefWidth(width);
-        content.setPrefHeight(30);
-        content.setTranslateY(height-30);
+        Pane textBoxPane = new Pane();
+        //textBoxPane.setPrefWidth(width);
+        textBoxPane.setPrefHeight(30);
+        //content.setTranslateY(height-30);
         textArea.setPromptText("Strudel back here..");
         textArea.setPrefSize(width-60, 30);
-        content.getChildren().add(textArea);
-        return content;
+        textBoxPane.getChildren().add(textArea);
+        return textBoxPane;
     }    
     
     public ScrollPane setScrollPane() {
@@ -103,7 +105,7 @@ public class CommentWindow {
         scrollPane.setTranslateX(0);
         scrollPane.setTranslateY(31);
         scrollPane.setPrefWidth(view.getWidth()+15);
-        scrollPane.setPrefHeight(view.getHeight()-50);
+        scrollPane.setPrefHeight(view.getHeight()-73);
         scrollPane.setStyle("-fx-background-color: " + strudel.getColor() + ";");
         scrollPane.toBack();
         return scrollPane;        
@@ -113,7 +115,7 @@ public class CommentWindow {
         Pane header = new Pane();
         header.setPrefWidth(width+15);
         header.setPrefHeight(30);
-        header.setStyle("-fx-background-color: #FFFFFF;");
+        header.setStyle("-fx-background-color: #FFFFFF;");     
         ImageView arrow = new ImageView(new Image("asset/img/arrow.png"));
         arrow.setX(5);
         arrow.setY(5);
@@ -127,6 +129,7 @@ public class CommentWindow {
     }
     
     public void post() {
+        System.out.println("POSTING");
         String message = textArea.getText().replaceAll("\n", System.getProperty("line.separator"));
         //logic.post(message, strudel.getColor());
         textArea.clear();

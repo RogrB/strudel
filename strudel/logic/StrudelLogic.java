@@ -72,14 +72,14 @@ public class StrudelLogic {
         io.downVote(id);
     }
     
-    public void upVoteComment(int id) {
-        System.out.println("upvote");
-        db.upVoteComment(id);
+    public void upVoteComment(int id, int commentID) {
+        db.upVoteComment(commentID);
+        io.upVoteComment(id, commentID);
     }
     
-    public void downVoteComment(int id) {
-        System.out.println("downvote");
-        db.downVoteComment(id);
+    public void downVoteComment(int id, int commentID) {
+        db.downVoteComment(commentID);
+        io.downVoteComment(id, commentID);
     }    
     
     public String getRandomColor() {

@@ -76,6 +76,18 @@ public class ioController {
         writeKarma();
     }
     
+    public void upVoteComment(int id, int commentID) {
+        this.karma += 10;
+        writeStrudelData(id, "up", commentID);
+        writeKarma();
+    }
+    
+    public void downVoteComment(int id, int commentID) {
+        this.karma -= 10;
+        writeStrudelData(id, "down", commentID);
+        writeKarma();
+    }
+    
     public void writeStrudelData(int id, String vote) {
         try {
             StrudelData data = new StrudelData(id, vote);

@@ -41,12 +41,12 @@ public class DBWriter {
     }
     
     public void downVoteComment(Connection connection, int id) {
-        String sql = "update comments set vote = votes-1 where commentID = '" + id + "';";
+        String sql = "update comments set votes = votes-1 where commentID = '" + id + "';";
         setVote(connection, sql);
     }
     
     public void upVoteComment(Connection connection, int id) {
-        String sql = "update comments set vote = votes+1 where commentID = '" + id + "';";
+        String sql = "update comments set votes = votes+1 where commentID = '" + id + "';";
         setVote(connection, sql);
     }
     
