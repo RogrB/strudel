@@ -86,6 +86,17 @@ public class ioController {
         }
     }
     
+    public void writeStrudelData(int id, String vote, int commentID) {
+        try {
+            StrudelData data = new StrudelData(id, vote);
+            data.setCommentID(commentID);
+            writer.writeStrudelData(dataPath, data);
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+        }        
+    }
+    
     public ArrayList<StrudelData> readStrudelData() {
         ArrayList<StrudelData> data = new ArrayList<>();
         try {

@@ -15,7 +15,9 @@ public class ioReader {
         while (dis.available() > 0) {
             int id = dis.readInt();
             String vote = dis.readUTF();
+            int commentID = dis.readInt();
             StrudelData strudel = new StrudelData(id, vote);
+            strudel.setCommentID(commentID);
             data.add(strudel);
         }
         return data;

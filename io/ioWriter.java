@@ -11,6 +11,7 @@ public class ioWriter {
         DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(filename, true)));
         dos.writeInt(strudelData.getID());
         dos.writeUTF(strudelData.getVote());
+        dos.writeInt(strudelData.getCommentID());
         dos.close();
     }    
 
