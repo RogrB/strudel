@@ -35,7 +35,6 @@ public class CommentWindow {
         ScrollPane scrollPane = setScrollPane();
         Pane footer = setFooter();
         Pane header = setHeader();
-        //root.setStyle("-fx-background-color: " + color + ";");
         root.getChildren().addAll(scrollPane, footer, header);
         scrollPane.setContent(content);
         return root;
@@ -88,9 +87,7 @@ public class CommentWindow {
     
     public Pane setTextBox() {
         Pane textBoxPane = new Pane();
-        //textBoxPane.setPrefWidth(width);
         textBoxPane.setPrefHeight(30);
-        //content.setTranslateY(height-30);
         textArea.setPromptText("Strudel back here..");
         textArea.setPrefSize(width-60, 30);
         textBoxPane.getChildren().add(textArea);
@@ -129,9 +126,8 @@ public class CommentWindow {
     }
     
     public void post() {
-        System.out.println("POSTING");
         String message = textArea.getText().replaceAll("\n", System.getProperty("line.separator"));
-        //logic.post(message, strudel.getColor());
+        logic.postComment(message, strudel.getColor(), strudel.getID());
         textArea.clear();
         view.resetScene();
     }

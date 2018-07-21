@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import strudel.logic.Strudel;
+import strudel.logic.StrudelComment;
 
 public class DBWriter {
     
@@ -19,6 +20,19 @@ public class DBWriter {
             ex.printStackTrace();      
         }
     }
+    
+    public void writeCommentToDB(Connection connection, StrudelComment strudel) {
+        try {
+            Statement stmt = connection.createStatement();
+            String sql = "insert into comments (id,commentID,time,votes,height,color,message) "
+                  + "values ('" + strudel.getID() + "', DEFAULT, '" + strudel.getTime() + "', '" + strudel.getVotes() +"', '"
+                  + strudel.getHeight() +"', '" + strudel.getColor() + "', '" + strudel.getMessage() + "');";
+            stmt.executeUpdate(sql);
+
+        } catch(SQLException ex) {
+            ex.printStackTrace();      
+        }
+    }    
     
     public void setVote(Connection connection, String sql) {
         try {

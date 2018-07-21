@@ -17,8 +17,12 @@ public class DBController {
         con = connection.getConnection();
     }
     
-    public void writeStrudel(Strudel strudel) {
+    public void writeStrudelToDB(Strudel strudel) {
         writer.writeStrudelToDB(con, strudel);
+    }
+    
+    public void writeCommentToDB(StrudelComment strudel) {
+        writer.writeCommentToDB(con, strudel);
     }
     
     public ArrayList<Strudel> readStrudels() {

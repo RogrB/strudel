@@ -118,7 +118,19 @@ public class StrudelLogic {
         strudel.setMessage(post);
         strudel.setVotes(0);
         strudel.setHeight(100);
-        db.writeStrudel(strudel);
+        db.writeStrudelToDB(strudel);
+    }
+    
+    public void postComment(String post, String color, int ID) {
+        StrudelComment strudel = new StrudelComment();
+        Date now = new Date();
+        strudel.setTime(now.getTime());
+        strudel.setColor(color);
+        strudel.setMessage(post);
+        strudel.setID(ID);
+        strudel.setVotes(0);
+        strudel.setHeight(100);
+        db.writeCommentToDB(strudel);
     }
     
     public ArrayList<Strudel> readStrudels() {

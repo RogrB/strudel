@@ -49,7 +49,6 @@ public class MainWindowRenderNode {
             setComment();
         }
     }
-    
 
     public void setText() {
         message.setText(strudel.getMessage());

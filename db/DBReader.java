@@ -58,7 +58,7 @@ public class DBReader {
     }  
   
     public ArrayList<StrudelComment> getComments(Connection connection, int id) {
-        String sql = "select * from comments where id = '" + id + "' order by time desc;";
+        String sql = "select * from comments where id = '" + id + "' order by time asc;";
         ArrayList<StrudelComment> strudels = new ArrayList();
           try {
              Statement stmt = connection.createStatement();

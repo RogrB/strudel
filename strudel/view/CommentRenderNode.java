@@ -54,10 +54,7 @@ public class CommentRenderNode extends MainWindowRenderNode {
         setUpButton();
         Pane upVotePane = new Pane();
         upVotePane.getChildren().add(upBtn);
-        upVotePane.setOnMouseClicked(event -> {
-            upVoteComment(this.strudel);
-            System.out.println("hallo");
-                });
+        upVotePane.setOnMouseClicked(event -> upVoteComment(this.strudel));
         upVotePane.setTranslateX(320);
         upVotePane.setTranslateY(y+15);
         upVotePane.setPrefSize(30, 30);
@@ -74,8 +71,36 @@ public class CommentRenderNode extends MainWindowRenderNode {
         downVotePane.setTranslateY(y+65);
         downVotePane.setPrefSize(30, 30);
         parent.getChildren().add(downVotePane);
-    }    
+    } 
     
+    /*
+    @Override
+    public void setUpButton() {
+        System.out.println(strudel.getVoteDirection());
+        if (strudel.hasVoted() && strudel.getVoteDirection().equals("up")) {
+            upBtn.setImage(new Image("asset/img/upVoteHalf.png"));
+        }
+        else if (strudel.hasVoted() && strudel.getVoteDirection().equals("down")) {
+            upBtn.setImage(new Image("asset/img/upVoteHollow.png"));
+        }
+        else {
+            upBtn.setImage(new Image("asset/img/upVoteFull.png"));
+        }
+    }
+    
+    @Override
+    public void setDownButton() {
+        if (strudel.hasVoted() && strudel.getVoteDirection().equals("up")) {
+            downBtn.setImage(new Image("asset/img/downVoteHollow.png"));
+        }
+        else if (strudel.hasVoted() && strudel.getVoteDirection().equals("down")) {
+            downBtn.setImage(new Image("asset/img/downVoteHalf.png"));
+        }
+        else {
+            downBtn.setImage(new Image("asset/img/downVoteFull.png"));
+        }        
+    }    
+    */
     @Override
     public void comment(Strudel strudel) {
         
