@@ -106,7 +106,6 @@ public class StrudelLogic {
                 color = "#FFFFFF";
                 break;
         }
-        System.out.println(color);
         return color;
     }
     
