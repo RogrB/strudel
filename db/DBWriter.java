@@ -1,6 +1,7 @@
 package db;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import strudel.logic.Strudel;
@@ -10,11 +11,15 @@ public class DBWriter {
     
     public void writeStrudelToDB(Connection connection, Strudel strudel) {
         try {
-            Statement stmt = connection.createStatement();
             String sql = "insert into strudel (id,time,votes,height,color,message) "
-                  + "values (DEFAULT, '" + strudel.getTime() + "', '" + strudel.getVotes() +"', '"
-                  + strudel.getHeight() +"', '" + strudel.getColor() + "', '" + strudel.getMessage() + "');";
-            stmt.executeUpdate(sql);
+                  + "values (DEFAULT, ?, ?, ?, ?, ?);";
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setLong(1, strudel.getTime());
+            stmt.setInt(2, strudel.getVotes());
+            stmt.setInt(3, strudel.getHeight());
+            stmt.setString(4, strudel.getColor());
+            stmt.setString(5, strudel.getMessage());
+            stmt.executeUpdate();
 
         } catch(SQLException ex) {
             ex.printStackTrace();      
@@ -23,11 +28,17 @@ public class DBWriter {
     
     public void writeCommentToDB(Connection connection, StrudelComment strudel) {
         try {
-            Statement stmt = connection.createStatement();
             String sql = "insert into comments (id,commentID,time,votes,height,color,message) "
-                  + "values ('" + strudel.getID() + "', DEFAULT, '" + strudel.getTime() + "', '" + strudel.getVotes() +"', '"
-                  + strudel.getHeight() +"', '" + strudel.getColor() + "', '" + strudel.getMessage() + "');";
-            stmt.executeUpdate(sql);
+                  + "values (?, DEFAULT, ?, ?, ?, ?, ?);";
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, strudel.getID());
+            stmt.setLong(2, strudel.getTime());
+            stmt.setInt(3, strudel.getVotes());
+            stmt.setInt(4, strudel.getHeight());
+            stmt.setString(5, strudel.getColor());
+            stmt.setString(6, strudel.getMessage());
+            System.out.println(stmt);
+            stmt.executeUpdate();
 
         } catch(SQLException ex) {
             ex.printStackTrace();      
